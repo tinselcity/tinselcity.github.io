@@ -7,7 +7,6 @@ description: At 3:30 a.m. on the night of June 5, 1992, the top telepath in the 
 url: "https://tinselcity.github.io"
 twitter_username: tinselcity1
 github_username:  tinselcity
-theme: jekyll-theme-cayman
 
 #
 # Flags below are optional
@@ -43,7 +42,7 @@ kramdown:
 
 # Set the Sass partials directory, as we're using @imports
 sass:
-  style: :expanded # You might prefer to minify using :compressed
+  style: :compressed # You might prefer to minify using :compressed
 
 # Use the following plug-ins
 gems:
