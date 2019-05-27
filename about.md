@@ -4,9 +4,7 @@ title: About
 permalink: /about/
 ---
 
-Reed Morrison
-
-#### Profile
+#### Reed Morrison
 
 - Currently living in LA County, working at [Verizon Digital Media Services](https://www.verizondigitalmedia.com/)
 - Graduated in 2001 from [UC Davis](https://www.ucdavis.edu/) (University of California Davis).
