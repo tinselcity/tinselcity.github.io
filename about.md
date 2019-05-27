@@ -35,6 +35,6 @@ permalink: /about/
 - [zeromq](http://zeromq.org/) openpgm assertion fail ([Bug+Proposed Fix](https://zeromq.jira.com/browse/LIBZMQ-296))
 - [ModSecurity](https://github.com/SpiderLabs/ModSecurity) iptree off by one heap overflow ([Demonstration](https://github.com/tinselcity/experiments/tree/master/modsecurity/ip_tree_bug)/[PR](https://github.com/SpiderLabs/ModSecurity/issues/1793))
 - [ModSecurity](https://github.com/SpiderLabs/ModSecurity) parse_arguments off by one ([PR](https://github.com/SpiderLabs/ModSecurity/issues/1799))
-- [ModSecurity](https://github.com/SpiderLabs/ModSecurity) utf8 character detection ((PR](https://github.com/SpiderLabs/ModSecurity/issues/1794))
+- [ModSecurity](https://github.com/SpiderLabs/ModSecurity) utf8 character detection ([PR](https://github.com/SpiderLabs/ModSecurity/issues/1794))
 
 
