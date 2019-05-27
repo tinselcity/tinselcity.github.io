@@ -3,14 +3,12 @@
 #
 
 name: tinselcity.github.io
-favicon: images/favicon.ico
 description: At 3:30 a.m. on the night of June 5, 1992, the top telepath in the Sol System fell off the map...
 #avatar: images/yakuza-cat.jpg
 url: "https://tinselcity.github.io"
 twitter_username: tinselcity1
 github_username:  tinselcity
 theme: jekyll-theme-cayman
-
 
 #
 # Flags below are optional
