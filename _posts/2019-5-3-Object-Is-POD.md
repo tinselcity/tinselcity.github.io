@@ -5,7 +5,7 @@ title: Checking object is POD
 
 A [coworker](https://twitter.com/daveisangry) showed me a neat trick to check at compile time whether a class/struct was POD.  `va_arg` does not allow non-POD arguments to be passed in.  He wrote a little compile time check that could be embedded in functions or even the class/struct declarations themselves.  This is not portable -it’s worked in g++ 4.6.3 on my linux box, but does not work in VC++ (MSVC++ apparently is quite happy to pass non-POD objects through va_arg.
 
-- note the `if(0)` ought to compile out -w/ any optimization level
+- the `if(0)` ought to compile out -w/ any optimization level
 
 ```cpp
 // Includes
