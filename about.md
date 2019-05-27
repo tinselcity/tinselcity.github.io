@@ -14,7 +14,10 @@ permalink: /about/
 
 #### Info
 
-- Resume (Curriculum Vitæ): [pdf]() [txt]()
+you can  directly.
+
+
+- Resume (Curriculum Vitæ): [pdf]({{ site.url }}/dat/reed-morrison-resume.pdf) [txt]({{ site.url }}/dat/reed-morrison-resume.txt)
 - [Twitter](https://twitter.com/tinselcity1)
 - [GitHub](https://github.com/tinselcity)
 - [reed.morrison (at) gmail.com](mailto:reed.morrison@gmail.com)
