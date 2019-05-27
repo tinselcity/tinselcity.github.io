@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-#### Profiles
+#### Profile
 
 - Currently living in LA County, working at [Verizon Digital Media Services](https://www.verizondigitalmedia.com/)
 - Graduated in 2001 from [UC Davis](https://www.ucdavis.edu/) (University of California Davis).
@@ -13,9 +13,6 @@ permalink: /about/
 ---
 
 #### Info
-
-you can  directly.
-
 
 - Resume (Curriculum Vitæ): [pdf]({{ site.url }}/dat/reed-morrison-resume.pdf) [txt]({{ site.url }}/dat/reed-morrison-resume.txt)
 - [Twitter](https://twitter.com/tinselcity1)
