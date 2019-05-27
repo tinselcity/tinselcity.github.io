@@ -1,0 +1,85 @@
+Reed Morrison
+Email: reed.morrison@gmail.com
+
+SUMMARY OF QUALIFICATIONS
+
+Software:
+Process/Precepts: CMMI/Avionics SW Development, OOP, Agile
+Programming: C, C++, Python, Lua, Shell
+OS’s: VxWorks (RTOS), Linux, Solaris, OS X
+IDE’s: Eclipse, Workbench/Tornado (Wind River), MULTI (Green Hills)
+Devices: DAQ, UART, MIL-STD-1553, PCI, VME, JTAG.
+Scientific/Visualization: MATLAB
+
+Education: B.S. Electrical Engineering (University of California Davis 2001)
+
+
+
+PROFESSIONAL EXPERIENCE
+
+Sr. SW Developer Edgecast (CDN), Santa Monica, CA
+(August 2013 - Present)
+
+Web Application Firewall for Edge Caching Server
+...
+
+Key Technologies Used:
+C, C++, Python, git.
+
+Sr. SW Developer CounterTack (Computer Security Startup), Santa Monica, CA
+(April 2011 - July 2013)
+
+VM Introspection Solution
+Improved performance and reliability of existing forensics collection/analysis projects.  Developed interprocess elastic buffer library with test harness.  Removed analysis SW bottlenecks identified via performance profiling. Developed automated testing suite to spin-up/attack VMs, and to verify correctness of forensics results.  Optimized VM system collection stack increasing data throughput, and VM performance. 
+
+Key Technologies Used:
+C, C++, Linux Kernel Modules, Windows Kernel-Mode Drivers, KVM, Python, Lua, git.
+
+
+Embedded SW Engineer Northrop Grumman Space Technology, Redondo Beach, CA
+(August 2007 - March 2011)
+
+Operationally Responsive Space (ORS) Satellite Plug-n-Play Standard Development
+Collaborated in the development of a Satellite Plug-n-Play (SPA) standard with Air Force Research Labs and consortium of space avionics vendors.  Created technical demos for presentations of standards enhancements.  Developed IP over SpaceWire END driver for VxWorks.  Created a novel topology discovery algorithm for source-based routing in point-to-point networks. 
+
+Key Technologies Used:
+C, C++, VxWorks 6.7, SVN, XML, SpaceWire, TCP, UDP, IP, ARP.
+
+Satellite - Communications System Payload Firmware:
+Lead firmware developer for command and data handling computer.  Firmware bootstrapped flight SBC, including run-time initialization, bridge configuration, and ground command-able loading/patching of the flight application.  Created requirements, design, and test documentation.  Developed suite of SW utilities to facilitate firmware SW unit testing, including an EEPROM file system layout tool, and a diagnostic serial shell supporting program loads/memory dumps/EEPROM burns.
+
+Key Technologies Used:
+Assembly (PowerPC), C, C++, VxWorks 5.5, RCS, Shell, Perl, Make.
+
+Satellite -Control System Payload SW Verification:
+Led flight SW verification effort including development of test requirements,  test-set HW/SW, and verification SW.  Verified HW and SW aspects of the target against program requirements.  Notable features of test-set included: JTAG/Serial/1553 I/O, a scriptable remote controlled interface for full-scale remote automation, database uploads, and test vector integration for comparing simulated control laws to actuals running on the target . 
+
+Key Technologies Used:
+C, C++, VxWorks 5.5, Assembly (PowerPC), Tcl, Sun RPC, SVN, Shell, JTAG, Make, MATLAB.
+
+
+Electrical Engineer ATK Space and Sensors (now Phase Coherence Inc.), Torrance, CA
+(July 2001 - April 2007)
+
+Medical Imaging System:
+For the Wellman Center of Photomedicine, developed fast data acquisition/storage system for a medical imaging application running on a single board computer.  Wrote low overhead high speed file system for managing data stored to a RAID from the SBC via fiber-channel.  Co-developed fast B-Spline interpolation and baseband conversion algorithms for an FPGA.
+	
+Key Technologies Used:
+C, C++, VxWorks, Cocoa, Objective C, CVS, SCSI, Apple XServe RAID, MATLAB.
+
+Laser Radar System:
+Developed laser radar data acquisition/processing server application for multi-CPU single board computers.  Demanding real-time performance requirements were met by: vectorizing radar algorithms, distributing workload over many CPUs, and optimizing corner turns per cache size.  Developed multi-processor notification/communication driver with POSIX-like interfaces.  Created fast 2-D graphing framework for Mac OS X that was successfully deployed in 5 projects.
+
+Key Technologies Used:
+C, VxWorks, Altivec, Cocoa, Objective C, CVS, MATLAB, LabWindows.
+
+Research Engineer CIPIC Interface Lab, Davis, CA (May 2000 – June 2001)
+
+Created new experimental setup, including analysis SW, for measuring the effect of the human ear on audible sound with the goal of recreating spatial (3-D) audio in headphones.  Developed novel approach to combining separate analytical head and ear responses to create an approximate total response function.
+
+Conference Paper:
+"Structural composition and decomposition of HRTF's, " V. Ralph Algazi, Richard O. Duda, Reed P. Morrison, Dennis M. Thompson, in WASSAP '01 (2001 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics)
+
+
+REFERENCES
+Available upon request
