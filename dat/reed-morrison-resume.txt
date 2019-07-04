@@ -3,37 +3,42 @@ Email: reed.morrison@gmail.com
 
 SUMMARY OF QUALIFICATIONS
 
-Software:
-Process/Precepts: CMMI/Avionics SW Development, OOP, Agile
-Programming: C, C++, Python, Lua, Shell
-OS’s: VxWorks (RTOS), Linux, Solaris, OS X
-IDE’s: Eclipse, Workbench/Tornado (Wind River), MULTI (Green Hills)
-Devices: DAQ, UART, MIL-STD-1553, PCI, VME, JTAG.
-Scientific/Visualization: MATLAB
+Recent Experience:
+Topics: HTTP Server development, web application security
+Languages: C, C++, Python, Bash, Golang
+Process: Agile/SAFe
 
-Education: B.S. Electrical Engineering (University of California Davis 2001)
-
+Education: B.S. Electrical Engineering (University of California Davis)
 
 
 PROFESSIONAL EXPERIENCE
 
-Sr. SW Developer Edgecast (CDN), Santa Monica, CA
-(August 2013 - Present)
 
-Web Application Firewall for Edge Caching Server
-...
+Security Core Development Lead (CDN) Verizon Digital Media Services, Playa Vista, CA
+(August 2016 - Present)
 
-Key Technologies Used:
-C, C++, Python, git.
+Web Application Firewall Engine
+Lead development of a new multi-tenant ModSecurity conformant engine (https://github.com/VerizonDigital/waflz).  New engine has allowed for much greater scale and capacity to accurately handle many more customers.
+
+Development Lead
+Lead product development for several successful and rapidly growing product lines for a large CDN with 10's of thousands of servers deployed in >160 locations globally with thousands of customers and handling traffic for reasonable swathe of the entire internet.  Product lines include: WAF, Rate-Limiting, and Bot mitigation.  Conducted code reviews, audits, and large-ish refactors of several internal and external team projects.
+
+
+Sr. SW Developer (CDN) Verizon Digital Media Services (formerly EdgeCast), Santa Monica, CA
+(August 2013 - August 2016)
+
+Edge to Origin TLS configuration
+Developed customer "Edge to Origin" TLS configuration including, hostname validation, cipher specifications, and certificate pinning.
+
+WAF and Rate-Limiting back office
+Designed and developed the security product back-office supporting the WAF and rate-limiting products, including: configuration API's, fast global config distribution, logging pipelines, and a large-ish elasticsearch cluster with customer facing dashboard API's.
+
 
 Sr. SW Developer CounterTack (Computer Security Startup), Santa Monica, CA
 (April 2011 - July 2013)
 
 VM Introspection Solution
 Improved performance and reliability of existing forensics collection/analysis projects.  Developed interprocess elastic buffer library with test harness.  Removed analysis SW bottlenecks identified via performance profiling. Developed automated testing suite to spin-up/attack VMs, and to verify correctness of forensics results.  Optimized VM system collection stack increasing data throughput, and VM performance. 
-
-Key Technologies Used:
-C, C++, Linux Kernel Modules, Windows Kernel-Mode Drivers, KVM, Python, Lua, git.
 
 
 Embedded SW Engineer Northrop Grumman Space Technology, Redondo Beach, CA
@@ -42,20 +47,11 @@ Embedded SW Engineer Northrop Grumman Space Technology, Redondo Beach, CA
 Operationally Responsive Space (ORS) Satellite Plug-n-Play Standard Development
 Collaborated in the development of a Satellite Plug-n-Play (SPA) standard with Air Force Research Labs and consortium of space avionics vendors.  Created technical demos for presentations of standards enhancements.  Developed IP over SpaceWire END driver for VxWorks.  Created a novel topology discovery algorithm for source-based routing in point-to-point networks. 
 
-Key Technologies Used:
-C, C++, VxWorks 6.7, SVN, XML, SpaceWire, TCP, UDP, IP, ARP.
-
 Satellite - Communications System Payload Firmware:
 Lead firmware developer for command and data handling computer.  Firmware bootstrapped flight SBC, including run-time initialization, bridge configuration, and ground command-able loading/patching of the flight application.  Created requirements, design, and test documentation.  Developed suite of SW utilities to facilitate firmware SW unit testing, including an EEPROM file system layout tool, and a diagnostic serial shell supporting program loads/memory dumps/EEPROM burns.
 
-Key Technologies Used:
-Assembly (PowerPC), C, C++, VxWorks 5.5, RCS, Shell, Perl, Make.
-
 Satellite -Control System Payload SW Verification:
 Led flight SW verification effort including development of test requirements,  test-set HW/SW, and verification SW.  Verified HW and SW aspects of the target against program requirements.  Notable features of test-set included: JTAG/Serial/1553 I/O, a scriptable remote controlled interface for full-scale remote automation, database uploads, and test vector integration for comparing simulated control laws to actuals running on the target . 
-
-Key Technologies Used:
-C, C++, VxWorks 5.5, Assembly (PowerPC), Tcl, Sun RPC, SVN, Shell, JTAG, Make, MATLAB.
 
 
 Electrical Engineer ATK Space and Sensors (now Phase Coherence Inc.), Torrance, CA
@@ -63,15 +59,9 @@ Electrical Engineer ATK Space and Sensors (now Phase Coherence Inc.), Torrance, 
 
 Medical Imaging System:
 For the Wellman Center of Photomedicine, developed fast data acquisition/storage system for a medical imaging application running on a single board computer.  Wrote low overhead high speed file system for managing data stored to a RAID from the SBC via fiber-channel.  Co-developed fast B-Spline interpolation and baseband conversion algorithms for an FPGA.
-	
-Key Technologies Used:
-C, C++, VxWorks, Cocoa, Objective C, CVS, SCSI, Apple XServe RAID, MATLAB.
 
 Laser Radar System:
 Developed laser radar data acquisition/processing server application for multi-CPU single board computers.  Demanding real-time performance requirements were met by: vectorizing radar algorithms, distributing workload over many CPUs, and optimizing corner turns per cache size.  Developed multi-processor notification/communication driver with POSIX-like interfaces.  Created fast 2-D graphing framework for Mac OS X that was successfully deployed in 5 projects.
-
-Key Technologies Used:
-C, VxWorks, Altivec, Cocoa, Objective C, CVS, MATLAB, LabWindows.
 
 Research Engineer CIPIC Interface Lab, Davis, CA (May 2000 – June 2001)
 
