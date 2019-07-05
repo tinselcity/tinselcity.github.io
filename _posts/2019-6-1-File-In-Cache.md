@@ -5,9 +5,7 @@ title: Checking Page Cache State of File on Linux with mincore
 
 The Linux syscall `mincore` can be used to "determine whether pages are resident in memory" -according to the [man page](http://man7.org/linux/man-pages/man2/mincore.2.html) _simple enuff :)_.
 
-```
-mincore() returns a vector that indicates whether pages of the calling process's virtual memory are resident in core (RAM), and  so  will  not cause  a  disk  access  (page fault) if referenced.  The kernel returns residency information about the pages starting at the address addr, and continuing for length bytes.
-```
+`mincore() returns a vector that indicates whether pages of the calling process's virtual memory are resident in core (RAM),...`
 
 It's possible to write a little program to check the page cache state of a file with `mincore` by `mmap`ing a file with read-only/shared attributes.
 
@@ -40,9 +38,7 @@ l_s = mincore(l_map, l_stat.st_size, l_vec);
 After the mincore call the state vector will contain either: 1 if the page resident in memory or 0 if not resident.
 
 Or more precisely from the man page:
-```
-On return, the least signif‐icant bit of each byte will be set if the corresponding page is currently resident in memory, and be clear otherwise.
-```
+`On return, the least signif‐icant bit of each byte will be set if the corresponding page is currently resident in memory, and be clear otherwise.`
 
 A little example using a [test program](https://github.com/tinselcity/experiments/tree/master/mincore)
 
