@@ -70,5 +70,3 @@ references:
 1. [TCP connection repair](https://lwn.net/Articles/495304/)
 2. [Dealing with Network Port Abuse in Sockets in C++](https://oroboro.com/dealing-with-network-port-abuse-in-sockets-in-c/)
 
-
-[1]: <https://en.wikipedia.org/wiki/Hobbit#Lifestyle> "Hobbit lifestyles"
