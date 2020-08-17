@@ -13,9 +13,14 @@ Education: B.S. Electrical Engineering (University of California Davis)
 
 PROFESSIONAL EXPERIENCE
 
+Sr Principal Development Engineer (CDN) Verizon Digital Media Services, Playa Vista, CA
+(September 2019 - Present)
+
+Assisting with various development projects within the CDN
+
 
 Security Core Development Lead (CDN) Verizon Digital Media Services, Playa Vista, CA
-(August 2016 - Present)
+(August 2016 - September 2019)
 
 Web Application Firewall Engine
 Lead development of a new multi-tenant ModSecurity conformant engine (https://github.com/VerizonDigital/waflz).  New engine has allowed for much greater scale and capacity to accurately handle many more customers.
