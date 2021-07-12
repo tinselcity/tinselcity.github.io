@@ -6,7 +6,7 @@ permalink: /about/
 
 #### Profile
 
-- Currently living in LA County, working at [Verizon Digital Media Services](https://www.verizondigitalmedia.com/)
+- Currently living in LA County, working at [EdgeCast](https://www.edgecast.com/)
 - Graduated in 2001 from [UC Davis](https://www.ucdavis.edu/) (University of California Davis).
 - Interested in software development and computer security.
 
@@ -23,10 +23,10 @@ permalink: /about/
 
 #### Open Source Projects
 
-- multitenant ModSecurity compatible waf engine ([waflz](https://github.com/VerizonDigital/waflz))
-- http(s)/h2 load test utility ([hurl](https://github.com/VerizonDigital/hurl))
-- http(s) api server library ([is2](https://github.com/VerizonDigital/is2))
-- tls protocol scanner ([tlsscan](https://github.com/VerizonDigital/tlsscan))
+- multitenant ModSecurity compatible waf engine ([waflz](https://github.com/EdgeCast/waflz))
+- http(s)/h2 load test utility ([hurl](https://github.com/EdgeCast/hurl))
+- http(s) api server library ([is2](https://github.com/EdgeCast/is2))
+- tls protocol scanner ([tlsscan](https://github.com/EdgeCast/tlsscan))
 
 ---
 

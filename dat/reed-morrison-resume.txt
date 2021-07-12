@@ -13,23 +13,23 @@ Education: B.S. Electrical Engineering (University of California Davis)
 
 PROFESSIONAL EXPERIENCE
 
-Sr Principal Development Engineer (CDN) Verizon Digital Media Services, Playa Vista, CA
+Sr Principal Development Engineer (CDN) EdgeCast, Playa Vista, CA
 (September 2019 - Present)
 
 Assisting with various development projects within the CDN
 
 
-Security Core Development Lead (CDN) Verizon Digital Media Services, Playa Vista, CA
+Security Core Development Lead (CDN) EdgeCast, Playa Vista, CA
 (August 2016 - September 2019)
 
 Web Application Firewall Engine
-Lead development of a new multi-tenant ModSecurity conformant engine (https://github.com/VerizonDigital/waflz).  New engine has allowed for much greater scale and capacity to accurately handle many more customers.
+Lead development of a new multi-tenant ModSecurity conformant engine (https://github.com/EdgeCast/waflz).  New engine has allowed for much greater scale and capacity to accurately handle many more customers.
 
 Development Lead
 Lead product development for several successful and rapidly growing product lines for a large CDN with 10's of thousands of servers deployed in >160 locations globally with thousands of customers and handling traffic for reasonable swathe of the entire internet.  Product lines include: WAF, Rate-Limiting, and Bot mitigation.  Conducted code reviews, audits, and large-ish refactors of several internal and external team projects.
 
 
-Sr. SW Developer (CDN) Verizon Digital Media Services (formerly EdgeCast), Santa Monica, CA
+Sr. SW Developer (CDN) EdgeCast, Santa Monica, CA
 (August 2013 - August 2016)
 
 Edge to Origin TLS configuration
