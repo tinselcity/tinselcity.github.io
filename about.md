@@ -6,7 +6,7 @@ permalink: /about/
 
 #### Profile
 
-- Currently living in LA County, working at [Edgio](https://www.edgio.com/)
+- Currently living in LA County, working at [Edgio](https://edg.io)
 - Graduated in 2001 from [UC Davis](https://www.ucdavis.edu/) (University of California Davis).
 - Interested in software development and computer security.
 
