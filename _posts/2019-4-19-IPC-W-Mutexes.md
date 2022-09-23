@@ -34,6 +34,10 @@ int open_mutex(pthread_mutex_t **a_mutex)
 }
 ```
 
-Now the mutex can be used between processes -take care to be wary of order of operations (ie create before use). [sample code](https://github.com/tinselcity/experiments/tree/master/ipc_mutex).
+Now the mutex can be used between processes -take care to be wary of order of operations (ie create before use).
 
-Also: note example of creating IPC semaphores using shared mutexes/condition variables in the [pthread_mutex_attr_init man page](https://linux.die.net/man/3/pthread_mutexattr_init).
+[Link to examples](https://github.com/tinselcity/experiments/tree/master/ipc_mutex).
+
+#### References:
+
+1. [Creating IPC Semaphores using mutex/condition variables](https://linux.die.net/man/3/pthread_mutexattr_init) _(pthread_mutex_attr_init man page)_

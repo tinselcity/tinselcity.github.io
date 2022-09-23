@@ -60,10 +60,8 @@ file: /tmp/nasa.xml is 0.00% in page cache
 file: /tmp/nasa.xml is 21.91% in page cache
 ```
 
-references:
+#### References:
+
 1. [mincore man](http://man7.org/linux/man-pages/man2/mincore.2.html)
 2. [vmtouch -the Virtual Memory Toucher](https://hoytech.com/vmtouch/)
 3. [attacks on mincore and patches](https://lwn.net/Articles/776801/)
-
-
-

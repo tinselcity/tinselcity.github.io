@@ -68,5 +68,6 @@ check_for_pod.cpp:46:5: error: cannot pass objects of non-trivially-copyable typ
 
 [Link to examples](https://github.com/tinselcity/experiments/tree/master/check_for_pod)
 
-Also: there’s pretty good info about POD types in C++11 in this [SO answer](https://stackoverflow.com/questions/4178175/what-are-aggregates-and-pods-and-how-why-are-they-special/7189821#7189821).
+#### References:
 
+1. [POD Types in C++11 (StackOverflow)](https://stackoverflow.com/questions/4178175/what-are-aggregates-and-pods-and-how-why-are-they-special/7189821#7189821)

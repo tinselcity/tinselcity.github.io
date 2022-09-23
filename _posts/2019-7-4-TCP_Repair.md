@@ -61,6 +61,7 @@ HELLO
 ```
 Note the lack of a server->client `FIN` message in the latter example.  The potential idea here being, it may be possible to exhaust client system resources like number of open file descriptors -if it's possible to leave the tcp connections half-open.
 
-references:
+#### References:
+
 1. [TCP connection repair](https://lwn.net/Articles/495304/)
 2. [Dealing with Network Port Abuse in Sockets in C++](https://oroboro.com/dealing-with-network-port-abuse-in-sockets-in-c/)
