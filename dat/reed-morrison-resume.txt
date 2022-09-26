@@ -32,7 +32,7 @@ Edge to Origin TLS configuration
 Developed customer "Edge to Origin" TLS configuration including, hostname validation, cipher specifications, and certificate pinning.
 
 WAF and Rate-Limiting back office
-Designed and developed the security product back-office supporting the WAF and rate-limiting products, including: configuration API's, fast global config distribution, logging pipelines, and a large-ish elasticsearch cluster with customer facing dashboard API's.
+Designed and developed the security product back-office supporting the WAF and L7 rate-limiting products, including: configuration API's, fast global config distribution, logging pipelines, and an Elasticsearch cluster with customer facing dashboard API's.
 
 
 Sr. SW Developer CounterTack (Computer Security Startup), Santa Monica, CA
