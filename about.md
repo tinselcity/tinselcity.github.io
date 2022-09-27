@@ -7,7 +7,7 @@ permalink: /about/
 #### Profile
 
 - Currently living in LA County, working at [Edgio](https://edg.io)
-- Graduated in 2001 from [UC Davis](https://www.ucdavis.edu/) (University of California Davis).
+- Graduated from [UC Davis](https://www.ucdavis.edu/) (University of California Davis).
 - Interested in software development and computer security.
 
 ---
@@ -23,10 +23,10 @@ permalink: /about/
 
 #### Open Source Projects
 
-- multitenant ModSecurity compatible waf engine ([waflz](https://github.com/edgioinc/waflz))
-- http(s)/h2 load test utility ([hurl](https://github.com/edgioinc/hurl))
-- http(s) api server library ([is2](https://github.com/edgioinc/is2))
-- tls protocol scanner ([tlsscan](https://github.com/edgioinc/tlsscan))
+- multitenant ModSecurity compatible waf engine ([waflz](https://github.com/edgio/waflz))
+- http(s)/h2 load test utility ([hurl](https://github.com/edgio/hurl))
+- http(s) api server library ([is2](https://github.com/edgio/is2))
+- tls protocol scanner ([tlsscan](https://github.com/edgio/tlsscan))
 
 ---
 
