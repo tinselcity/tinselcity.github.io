@@ -28,11 +28,11 @@ Lead security application development for a large global CDN with thousands of c
 Sr. SW Developer (CDN) EdgeCast, Santa Monica, CA
 (August 2013 - August 2016)
 
+WAF and Rate-Limiting back office
+Designed and developed the security product back-office supporting the WAF and L7 rate-limiting products, including: configuration API's, fast global config distribution, logging pipelines, and an HA data cluster with customer facing dashboard API's.
+
 Edge to Origin TLS configuration
 Developed customer "Edge to Origin" TLS configuration including, hostname validation, cipher specifications, and certificate pinning.
-
-WAF and Rate-Limiting back office
-Designed and developed the security product back-office supporting the WAF and L7 rate-limiting products, including: configuration API's, fast global config distribution, logging pipelines, and an Elasticsearch cluster with customer facing dashboard API's.
 
 
 Sr. SW Developer CounterTack (Computer Security Startup), Santa Monica, CA
