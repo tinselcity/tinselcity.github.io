@@ -4,7 +4,7 @@ Email: reed.morrison@gmail.com
 SUMMARY OF QUALIFICATIONS
 
 Recent Experience:
-Topics: HTTP Server development, web application security
+Topics: web Server development, web application security, distributed computing
 Languages: C, C++, Python, Bash, Golang
 Process: Agile/SAFe
 
