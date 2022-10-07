@@ -8,7 +8,7 @@ permalink: /about/
 
 - Currently living in LA County, working at [Edgio](https://edg.io)
 - Graduated from [UC Davis](https://www.ucdavis.edu/) (University of California Davis).
-- Interested in software development and computer security.
+- Interested in web server development, web application security, and distributed computing.
 
 ---
 
