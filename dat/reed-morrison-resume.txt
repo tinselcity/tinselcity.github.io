@@ -13,11 +13,10 @@ Education: B.S. Electrical Engineering (University of California Davis)
 
 PROFESSIONAL EXPERIENCE
 
-Sr Principal Development Engineer (CDN) Edgio, Playa Vista, CA
+Senior Principal Software Engineer (CDN) Edgio, Playa Vista, CA
 (September 2019 - present)
 
-Edge front-end server development, including L7 load balancing, TLS termination, etc
-
+Edge front-end server development, including: L7 load balancing, consistent hashing/cache key generation with scaling for popular content, secure highly multi-tenant TLS termination (client to edge).  Developed concepts for customer configurations with support for self-service and faster edge distribution.
 
 Security Core Development Lead (CDN) Edgio, Playa Vista, CA
 (August 2016 - September 2019)
@@ -25,7 +24,7 @@ Security Core Development Lead (CDN) Edgio, Playa Vista, CA
 Lead security application development for a large global CDN with thousands of customers.  Product lines included: WAF, L7 rate-limiting, and basic bot mitigation.  Developed multi-tenant ModSecurity conformant WAF allowing for improved performance, and scale.  Conducted code reviews, audits, and large-ish refactors of several internal and external team projects.
 
 
-Sr. SW Developer (CDN) EdgeCast, Santa Monica, CA
+Senior Software Engineer (CDN) EdgeCast, Santa Monica, CA
 (August 2013 - August 2016)
 
 WAF and Rate-Limiting back office
@@ -35,14 +34,14 @@ Edge to Origin TLS configuration
 Developed customer "Edge to Origin" TLS configuration including, hostname validation, cipher specifications, and certificate pinning.
 
 
-Sr. SW Developer CounterTack (Computer Security Startup), Santa Monica, CA
+Software Engineer CounterTack (Computer Security Startup), Santa Monica, CA
 (April 2011 - July 2013)
 
 VM Introspection Solution
 Improved performance and reliability of existing forensics collection/analysis projects.  Developed interprocess elastic buffer library with test harness.  Removed analysis SW bottlenecks identified via performance profiling. Developed automated testing suite to spin-up/attack VMs, and to verify correctness of forensics results.  Optimized VM system collection stack increasing data throughput, and VM performance. 
 
 
-Embedded SW Engineer Northrop Grumman Space Technology, Redondo Beach, CA
+Embedded Software Engineer Northrop Grumman Space Technology, Redondo Beach, CA
 (August 2007 - March 2011)
 
 Operationally Responsive Space (ORS) Satellite Plug-n-Play Standard Development
@@ -67,10 +66,6 @@ Developed laser radar data acquisition/processing server application for multi-C
 Research Engineer CIPIC Interface Lab, Davis, CA (May 2000 – June 2001)
 
 Created new experimental setup, including analysis SW, for measuring the effect of the human ear on audible sound with the goal of recreating spatial (3-D) audio in headphones.  Developed novel approach to combining separate analytical head and ear responses to create an approximate total response function.
-
-Conference Paper:
-"Structural composition and decomposition of HRTF's, " V. Ralph Algazi, Richard O. Duda, Reed P. Morrison, Dennis M. Thompson, in WASSAP '01 (2001 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics)
-
 
 REFERENCES
 Available upon request
