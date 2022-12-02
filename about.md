@@ -27,6 +27,7 @@ permalink: /about/
 - http(s)/h2 load test utility ([hurl](https://github.com/edgio/hurl))
 - http(s) api server library ([is2](https://github.com/edgio/is2))
 - tls protocol scanner ([tlsscan](https://github.com/edgio/tlsscan))
+- BitTorrent client ([ntrnt](https://github.com/tinselcity/ntrnt))
 
 ---
 
@@ -37,5 +38,3 @@ permalink: /about/
 - [ModSecurity](https://github.com/SpiderLabs/ModSecurity) iptree off by one heap overflow ([Demonstration](https://github.com/tinselcity/experiments/tree/master/modsecurity/ip_tree_bug)/[PR](https://github.com/SpiderLabs/ModSecurity/issues/1793))
 - [ModSecurity](https://github.com/SpiderLabs/ModSecurity) parse_arguments off by one ([PR](https://github.com/SpiderLabs/ModSecurity/issues/1799))
 - [ModSecurity](https://github.com/SpiderLabs/ModSecurity) utf8 character detection ([PR](https://github.com/SpiderLabs/ModSecurity/issues/1794))
-
-
