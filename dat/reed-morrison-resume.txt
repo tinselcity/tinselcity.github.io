@@ -1,10 +1,22 @@
 Reed Morrison
 Email: reed.morrison@gmail.com
 
-SUMMARY OF QUALIFICATIONS
+LINKS
 
-Recent Experience:
-Topics: web Server development, web application security, distributed computing
+Website: https://tinselcity.github.io
+GitHub: https://github.com/tinselcity
+LinkedIn: https://www.linkedin.com/in/reed-morrison
+Twitter: https://www.twitter.com/tinselcity1
+
+
+STATEMENT
+
+Software engineer with experience in the development of web servers, and cloud based security applications.  Lead teams, and created several successful product lines at a reasonably large scale (in number of customers and traffic).  Interested in web servers, web application security, and distributed computing.
+
+
+SKILLS
+
+Topics: Clients/Servers, Internet Protocols, (HTTP/H2, TLS, UDP, TCP/IP), WAF’s
 Languages: C, C++, Python, Bash, Golang
 Process: Agile/SAFe
 
@@ -62,10 +74,3 @@ For the Wellman Center of Photomedicine, developed fast data acquisition/storage
 
 Laser Radar System:
 Developed laser radar data acquisition/processing server application for multi-CPU single board computers.  Demanding real-time performance requirements were met by: vectorizing radar algorithms, distributing workload over many CPUs, and optimizing corner turns per cache size.  Developed multi-processor notification/communication driver with POSIX-like interfaces.  Created fast 2-D graphing framework for Mac OS X that was successfully deployed in 5 projects.
-
-Research Engineer CIPIC Interface Lab, Davis, CA (May 2000 – June 2001)
-
-Created new experimental setup, including analysis SW, for measuring the effect of the human ear on audible sound with the goal of recreating spatial (3-D) audio in headphones.  Developed novel approach to combining separate analytical head and ear responses to create an approximate total response function.
-
-REFERENCES
-Available upon request
