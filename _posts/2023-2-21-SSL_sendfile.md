@@ -19,6 +19,8 @@ Testing with [hurl](https://github.com/edgio/hurl):
 
 `hurl` is my tool, but I checked with [wrk](https://github.com/wg/wrk) and got similar numbers.  I chose `hurl` so I could tune the number of requests per connection per run.
 
+#### Running
+
 `hurl` was run with:
 ```sh
 hurl 'https://localhost:12345/<resource>' --silent --threads=4 --parallel=4 --seconds=10 --calls=<num_calls>
