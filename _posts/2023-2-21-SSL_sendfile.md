@@ -12,7 +12,7 @@ title: SSL_sendfile performance with nginx
 
 ### Load Testing
 
-Testing with [hurl](https://github.com/edgio/hurl) on a Xeon Gold Server:
+Testing over localhost with [hurl](https://github.com/edgio/hurl) on a Xeon Gold Server:
 ```sh
 >cat /proc/cpuinfo | grep 'model name' | uniq
 model name	: Intel(R) Xeon(R) Gold 6230R CPU @ 2.10GHz
