@@ -5,7 +5,6 @@ title: SSL_sendfile performance with nginx
 
 ### Background
 
-TODO
 
 - check kernel support + enable
 - build openssl with support
@@ -65,3 +64,4 @@ TODO
 #### References
 - NGINX Blog Post: [https://www.nginx.com/blog/improving-nginx-performance-with-kernel-tls/](https://www.nginx.com/blog/improving-nginx-performance-with-kernel-tls/)
 - OpenSSL Issue (~~Closed~~) with detailed enablement help: [https://github.com/openssl/openssl/issues/17451](https://github.com/openssl/openssl/issues/17451)
+- load test data: [google sheets](https://docs.google.com/spreadsheets/d/1fJ201NwZCR6coodGlTgkiqPOP9zwA8YUoFYmgGdw7o8)
