@@ -86,7 +86,7 @@ openssl version
 OpenSSL 3.0.8-dev 1 Nov 2022 (Library: OpenSSL 3.0.8-dev 1 Nov 2022)
 ```
 
-Building OpenSSL with `kTLS` support is _interesting_?   This might be out of date information but [I found it to be true](https://reviews.freebsd.org/rG671a35b176e4b3c445696a8b423db5f8de26c285) that OpenSSL does _not_ enable `kTLS` support by default for their tool chain, and it must be configured with a custom `openssl.cnf` configuration.  Just something to be wary of if using `openssl` commands on the command line (eg. `openssl s_server` with the  `-sendfile`option).  For example to run `s_server` with `kTLS` enabled and using a customer build of OpenSSL:
+Building OpenSSL with `kTLS` support is _interesting_?   This might be out of date information but [I found it to be true](https://reviews.freebsd.org/rG671a35b176e4b3c445696a8b423db5f8de26c285) that OpenSSL does _not_ enable `kTLS` support by default for their tool chain, and it must be configured with a custom `openssl.cnf` configuration.  Just something to be wary of if using `openssl` commands on the command line (eg. `openssl s_server` with the  `-sendfile` option).  For example to run `s_server` with `kTLS` enabled and using a custom build of OpenSSL:
 
 ```sh
 OPENSSL_CONF=<custom_openssl.cnf file> \
@@ -115,7 +115,7 @@ I added the following lines to a generic `openssl.cnf` file:
 + Options = KTLS
 ```
 
-This also means a custom OpenSSL library will have to built and linked with `nginx` since by default most versions available on systems will either not have the feature (if OpenSSL version < 3.0.0) or it won't have been enabled by default.
+This also means a custom OpenSSL library will have to be built and linked with `nginx` since by default, most versions available on systems will either not have the feature (if OpenSSL version < 3.0.0) or it won't have been enabled by default.
 
 To configure OpenSSL to build with `kTLS` support, (in the OpenSSL repo dir) run:
 ```sh
