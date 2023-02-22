@@ -3,8 +3,6 @@ layout: post
 title: OpenSSL SSL_sendfile performance with nginx on Linux
 ---
 
-### Background
-
 [OpenSSL](https://www.openssl.org/)'s implementation of [SSL_sendfile](https://www.openssl.org/docs/man3.1/man3/SSL_sendfile.html) uses [kernel TLS]( to make an encrypted version of the [`sendfile`](https://man7.org/linux/man-pages/man2/sendfile.2.html) system call ) encryption to optimize away user space copying of file data before sending on a socket.
 
 So from:
