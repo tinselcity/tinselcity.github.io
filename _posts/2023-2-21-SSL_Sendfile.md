@@ -5,7 +5,9 @@ title: OpenSSL SSL_sendfile performance with nginx on Linux
 
 ### Background
 
-Without doing too much code spelunking [OpenSSL](https://www.openssl.org/)'s implementation of [SSL_sendfile](https://www.openssl.org/docs/man3.1/man3/SSL_sendfile.html) appears to use the [`sendfile`](https://man7.org/linux/man-pages/man2/sendfile.2.html) system call to optimize away user space copying of:
+[OpenSSL](https://www.openssl.org/)'s implementation of [SSL_sendfile](https://www.openssl.org/docs/man3.1/man3/SSL_sendfile.html) uses [kernel TLS]( to make an encrypted version of the [`sendfile`](https://man7.org/linux/man-pages/man2/sendfile.2.html) system call ) encryption to optimize away user space copying of file data before sending on a socket.
+
+So from:
 
 - `FILE`  -->  `<user-space application>`  -->  `socket` 
 
@@ -13,24 +15,29 @@ to just
 
 - `FILE`  -->  `socket` 
 
+This is sort of an encryption version of the [`sendfile`](https://man7.org/linux/man-pages/man2/sendfile.2.html) system call.
+
 Running `nginx` and `curl`ing
 
 ```sh
 nginx-1.23.2>strace -f ./objs/nginx -c ./nginx.conf ...
-[pid 349910] openat(AT_FDCWD, "/home/rmorrison/data/www/rand_64MB.bin", O_RDONLY|O_NONBLOCK) = 11
-[pid 349910] newfstatat(11, "", {st_mode=S_IFREG|0664, st_size=67108864, ...}, AT_EMPTY_PATH) = 0
-[pid 349910] fadvise64(11, 0, 0, POSIX_FADV_SEQUENTIAL) = 0
-[pid 349910] write(3, "HTTP/1.1 200 OK\r\nServer: nginx/1"..., 262) = 262
-[pid 349910] sendfile(3, 11, [0] => [2097152], 2097152) = 2097152
-[pid 349910] epoll_wait(9, [], 512, 0)  = 0
-[pid 349910] sendfile(3, 11, [2097152] => [4194304], 2097152) = 2097152
-[pid 349910] epoll_wait(9, [], 512, 0)  = 0
-[pid 349910] sendfile(3, 11, [4194304] => [6291456], 2097152) = 2097152
-[pid 349910] epoll_wait(9, [], 512, 0)  = 0
+...
+[pid 408582] setsockopt(13, SOL_TCP, TCP_ULP, [7564404], 4) = 0
+...
+[pid 408582] setsockopt(13, SOL_TLS, TLS_TX, "\4\0034\0$F\273F\266\232\"\25M\v\33\257\31\366\252\210Q)>\225\200\216\235\300\341c\300T"..., 56) = 0
+[pid 408582] openat(AT_FDCWD, "/home/rmorrison/data/www/rand_1MB.bin", O_RDONLY|O_NONBLOCK) = 14
+[pid 408582] newfstatat(14, "", {st_mode=S_IFREG|0664, st_size=1048576, ...}, AT_EMPTY_PATH) = 0
+[pid 408582] fadvise64(14, 0, 0, POSIX_FADV_SEQUENTIAL) = 0
+[pid 408582] write(3, "HTTP/1.1 200 OK\r\nServer: nginx/1"..., 260) = 260
+[pid 408582] sendfile(3, 14, [0] => [1048576], 1048576) = 1048576
+[pid 408582] write(5, "127.0.0.1 - - [21/Feb/2023:17:27"..., 112) = 112
+[pid 408582] close(14)                  = 0
 ...
 ```
 
- [`sendfile`](https://man7.org/linux/man-pages/man2/sendfile.2.html) has been around for a long time, but Linux kernel support for encrypted `sendfile` behavior was only [added in 2015](https://lwn.net/Articles/665602/).  OpenSSL has opted to only add support for `kTLS` and the `SSL_sendfile` function in their `3.x`+ series of releases, meaning OpenSSL `1.x`+ doesn't currently have support.
+See ["Kernel TLS"](https://docs.kernel.org/networking/tls.html) guide to implementing applications with `kTLS`.
+
+ [`sendfile`](https://man7.org/linux/man-pages/man2/sendfile.2.html) has been around for a long time, but Linux kernel support for doing encryption in the kernel was only [added in 2015](https://lwn.net/Articles/665602/).  OpenSSL has opted to only add support for `kTLS` and the `SSL_sendfile` function in their `3.x`+ series of releases, meaning OpenSSL `1.x`+ doesn't currently have support.
 
 
 #### Kernel Support
@@ -81,7 +88,20 @@ openssl version
 OpenSSL 3.0.8-dev 1 Nov 2022 (Library: OpenSSL 3.0.8-dev 1 Nov 2022)
 ```
 
-Building OpenSSL with `kTLS` support is _interesting_?   This might be out of date information but [I found it to be true](https://reviews.freebsd.org/rG671a35b176e4b3c445696a8b423db5f8de26c285) that OpenSSL does _not_ enable `kTLS` support by default for their tool chain, and it must be configured with a custom `openssl.cnf` configuration.  Just something to be wary of if using `openssl` commands on the command line (eg. `openssl s_server` with the  `-sendfile`option).
+Building OpenSSL with `kTLS` support is _interesting_?   This might be out of date information but [I found it to be true](https://reviews.freebsd.org/rG671a35b176e4b3c445696a8b423db5f8de26c285) that OpenSSL does _not_ enable `kTLS` support by default for their tool chain, and it must be configured with a custom `openssl.cnf` configuration.  Just something to be wary of if using `openssl` commands on the command line (eg. `openssl s_server` with the  `-sendfile`option).  For example to run `s_server` with `kTLS` enabled and using a customer build of OpenSSL:
+
+```sh
+OPENSSL_CONF=<custom_openssl.cnf file> \
+LD_LIBRARY_PATH=<path to custom openssl> \
+openssl s_server \
+  -key server.key \
+  -cert server.crt \
+  -accept 12345 \
+  -www \
+  -sendfile
+```
+
+*NOTE* the `OPENSSL_CONF` and `LD_LIBRARY_PATH` env vars in the command above.
 
 I added the following lines to a generic `openssl.cnf` file:
 ```diff
@@ -157,71 +177,37 @@ ssl_conf_command Options  KTLS;
 
 Here's an abridged version of my local test config:
 ```perl
-# ------------------------------------------------------------------------------
-# base config
-# ------------------------------------------------------------------------------
 worker_processes 1;
 daemon off;
-# ------------------------------------------------------------------------------
-# events
-# ------------------------------------------------------------------------------
 events {
     worker_connections 1024;
 }
-# ------------------------------------------------------------------------------
-# http server
-# ------------------------------------------------------------------------------
 http {
-    # ------------------------------------------------------
-    # logging
-    # ------------------------------------------------------
-    #error_log /var/tmp/nginx/error.log info;
     error_log /var/tmp/nginx/error.log error;
-    # ------------------------------------------------------
-    # basic nginx directives
-    # ------------------------------------------------------
     include            mime.types;
     default_type       application/octet-stream;
     sendfile           on;
-    # default 0 https://nginx.org/en/docs/http/ngx_http_core_module.html#read_ahead
     read_ahead         1;
     tcp_nopush         on;
     tcp_nodelay        on;
     keepalive_timeout  3600;
-    # default 100 http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_requests
     keepalive_requests 10000;
-    # ------------------------------------------------------
-    # 443 Server
-    # ------------------------------------------------------
     server {
-        # --------------------------------------------------
-        # ssl options
-        # --------------------------------------------------
-        #listen                    12345;
         listen                    12345 ssl;
         ssl_certificate           /home/rmorrison/data/conf/certs/my_default.crt;
         ssl_certificate_key       /home/rmorrison/data/conf/certs/my_default.key;
-        #ssl_conf_command Options  KTLS;
-        ssl_protocols             TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
-        # --------------------------------------------------
-        # server settings
-        # --------------------------------------------------
-        server_name               gimpee;
+        ssl_conf_command Options  KTLS;
+        ssl_protocols             TLSv1.2 TLSv1.3;
+        server_name               myserver;
         access_log                /var/tmp/nginx/access.log;
         client_body_temp_path     /var/tmp/nginx/client_body_temp;
         proxy_temp_path           /var/tmp/nginx/proxy_temp;
-        # --------------------------------------------------
-        # locations
-        # --------------------------------------------------
         location / {
             root  /home/rmorrison/data/www/;
             index index.html;
         }
     }
 }
-
-
-
 ```
 
 ### Load Testing
@@ -279,7 +265,11 @@ hurl 'https://localhost:12345/rand_8kB.bin' --silent --threads=4 --parallel=4 --
 
 
 ### Summary
-TODO
+
+The results are mostly what I expected from a `sendfile` like optimization, in that the speed up becomes more pronounced as the time to connect/handshake fades into the background and more time is spent in the symmetric cryptographic sending and receiving of file data.  With larger files (> 1MB) the results can be dramatically better with ~60-70% improved throughput.
+
+What's interesting also is performance of `SSL_sendfile` with smaller files (1-8kB) is a little worse than just `SSL_write`.  I haven't dug into why yet, but might be something to keep track of and maybe avoid if size can be read ahead of serving.
+
 
 #### References
 - Kernel TLS: [https://docs.kernel.org/networking/tls.html](https://docs.kernel.org/networking/tls.html)
