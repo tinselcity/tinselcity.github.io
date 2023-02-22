@@ -7,11 +7,11 @@ title: OpenSSL SSL_sendfile performance with nginx on Linux
 
 Without doing too much code spelunking [OpenSSL](https://www.openssl.org/)'s implementation of [SSL_sendfile](https://www.openssl.org/docs/man3.1/man3/SSL_sendfile.html) appears to use the [`sendfile`](https://man7.org/linux/man-pages/man2/sendfile.2.html) system call to optimize away user space copying of:
 
-- `FILE`-->`<user-space application>`-->`socket` 
+- `FILE`  -->  `<user-space application>`  -->  `socket` 
 
 to just
 
-- `FILE`-->`socket` 
+- `FILE`  -->  `socket` 
 
 Running `nginx` and `curl`ing
 
@@ -30,7 +30,7 @@ nginx-1.23.2>strace -f ./objs/nginx -c ./nginx.conf ...
 ...
 ```
 
- [`sendfile`](https://man7.org/linux/man-pages/man2/sendfile.2.html) has been around for a long time, but Linux kernel support for encrypted `sendfile` behavior was only [added in 2015](https://lwn.net/Articles/665602/).  OpenSSL has opted to only add support for `kTLS` and the `SSL_sendfile` function in their `3.x`+ series of releases, meaning OpenSSL 1.x doesn't currently support it.
+ [`sendfile`](https://man7.org/linux/man-pages/man2/sendfile.2.html) has been around for a long time, but Linux kernel support for encrypted `sendfile` behavior was only [added in 2015](https://lwn.net/Articles/665602/).  OpenSSL has opted to only add support for `kTLS` and the `SSL_sendfile` function in their `3.x`+ series of releases, meaning OpenSSL `1.x`+ doesn't currently have support.
 
 
 #### Kernel Support
@@ -81,7 +81,7 @@ openssl version
 OpenSSL 3.0.8-dev 1 Nov 2022 (Library: OpenSSL 3.0.8-dev 1 Nov 2022)
 ```
 
-Building OpenSSL with `kTLS` support is _interesting_?   This might be out of date information but [I found it to be true](https://reviews.freebsd.org/rG671a35b176e4b3c445696a8b423db5f8de26c285) that OpenSSL does _not_ enable `kTLS` support by default, and it must be configured with a custom `openssl.cnf` configuration.
+Building OpenSSL with `kTLS` support is _interesting_?   This might be out of date information but [I found it to be true](https://reviews.freebsd.org/rG671a35b176e4b3c445696a8b423db5f8de26c285) that OpenSSL does _not_ enable `kTLS` support by default for their tool chain, and it must be configured with a custom `openssl.cnf` configuration.  Just something to be wary of if using `openssl` commands on the command line (eg. `openssl s_server` with the  `-sendfile`option).
 
 I added the following lines to a generic `openssl.cnf` file:
 ```diff
@@ -119,11 +119,110 @@ openssl>make -j$(nproc)
 ...
 ```
 
+If there's issues with building/configuring/testing `kTLS` support with OpenSSL please see this [GitHub Issue](https://github.com/openssl/openssl/issues/17451) which has lots of troubleshooting advice from OpenSSL dev's and users.  It helped me a lot.
+
 #### Building nginx and enabling
 
-- building nginx with openssl and enable
+To configure building nginx with a custom built OpenSSL library (in the nginx source tree)
+```sh
+nginx-1.23.2>./configure \
+  --with-http_ssl_module \
+  --with-openssl=<path_to_custom_openssl_src_tree> \
+  --with-openssl-opt=enable-ktls
+```
+
+I wanted pcre and h2 support as well so my specific configure line was:
+```sh
+nginx-1.23.2>./configure \
+  --with-pcre-jit \
+  --with-pcre \
+  --with-http_v2_module \
+  --with-http_ssl_module \
+  --with-openssl=/home/rmorrison/archive/openssl \
+  --with-openssl-opt=enable-ktls
+```
+
+Then just build as usual.
+
+One thing to note [in the nginx code](https://github.com/nginx/nginx/blob/2485681308bd8d3108da31546cb91bb97813a3fb/src/event/ngx_event_openssl.c#L1822) is how nginx tests if `kTLS` is enabled on the socket with the [`BIO_get_ktls_send`](https://www.openssl.org/docs/manmaster/man3/BIO_get_ktls_send.html) function:
+```sh
+BIO_get_ktls_send() returns 1 if the BIO is using the Kernel TLS data-path for sending. Otherwise, it returns zero. BIO_get_ktls_recv() returns 1 if the BIO is using the Kernel TLS data-path for receiving. Otherwise, it returns zero.
+```
+
+To configure the server to enable `SSL_sendfile` with `kTLS` (with an `ssl` listener)
+```perl
+sendfile on;
+ssl_conf_command Options  KTLS;
+```
+
+Here's an abridged version of my local test config:
+```perl
+# ------------------------------------------------------------------------------
+# base config
+# ------------------------------------------------------------------------------
+worker_processes 1;
+daemon off;
+# ------------------------------------------------------------------------------
+# events
+# ------------------------------------------------------------------------------
+events {
+    worker_connections 1024;
+}
+# ------------------------------------------------------------------------------
+# http server
+# ------------------------------------------------------------------------------
+http {
+    # ------------------------------------------------------
+    # logging
+    # ------------------------------------------------------
+    #error_log /var/tmp/nginx/error.log info;
+    error_log /var/tmp/nginx/error.log error;
+    # ------------------------------------------------------
+    # basic nginx directives
+    # ------------------------------------------------------
+    include            mime.types;
+    default_type       application/octet-stream;
+    sendfile           on;
+    # default 0 https://nginx.org/en/docs/http/ngx_http_core_module.html#read_ahead
+    read_ahead         1;
+    tcp_nopush         on;
+    tcp_nodelay        on;
+    keepalive_timeout  3600;
+    # default 100 http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_requests
+    keepalive_requests 10000;
+    # ------------------------------------------------------
+    # 443 Server
+    # ------------------------------------------------------
+    server {
+        # --------------------------------------------------
+        # ssl options
+        # --------------------------------------------------
+        #listen                    12345;
+        listen                    12345 ssl;
+        ssl_certificate           /home/rmorrison/data/conf/certs/my_default.crt;
+        ssl_certificate_key       /home/rmorrison/data/conf/certs/my_default.key;
+        #ssl_conf_command Options  KTLS;
+        ssl_protocols             TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+        # --------------------------------------------------
+        # server settings
+        # --------------------------------------------------
+        server_name               gimpee;
+        access_log                /var/tmp/nginx/access.log;
+        client_body_temp_path     /var/tmp/nginx/client_body_temp;
+        proxy_temp_path           /var/tmp/nginx/proxy_temp;
+        # --------------------------------------------------
+        # locations
+        # --------------------------------------------------
+        location / {
+            root  /home/rmorrison/data/www/;
+            index index.html;
+        }
+    }
+}
 
 
+
+```
 
 ### Load Testing
 
