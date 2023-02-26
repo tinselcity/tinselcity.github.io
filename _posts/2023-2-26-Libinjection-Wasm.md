@@ -20,7 +20,9 @@ const gMemory = new WebAssembly.Memory({
 let gWasm;
 const importObject = {imports: {}};
 (async () => {
-  gWasm = await WebAssembly.instantiateStreaming(fetch('https://github.com/tinselcity/tinselcity.github.io/blob/master/dat/blog/2023_2_26_Libinjection_Wasm/libinjection.wasm'), importObject);
+  const response = await fetch("https://github.com/tinselcity/tinselcity.github.io/blob/master/dat/blog/2023_2_26_Libinjection_Wasm/libinjection.wasm");
+  const buffer = await response.arrayBuffer();
+  gWasm = await WebAssembly.instantiate(buffer);
   display_version();
 })();
 // ---------------------------------------------------------
