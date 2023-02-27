@@ -36,7 +36,7 @@ Security Core Development Lead (CDN) Edgio, Playa Vista, CA
 Lead security application development for a large global CDN with thousands of customers.  Product lines included: WAF, L7 rate-limiting, and basic bot mitigation.  Developed multi-tenant ModSecurity conformant WAF allowing for improved performance, and scale.  Conducted code reviews, audits, and large-ish refactors of several internal and external team projects.
 
 
-Senior Software Engineer (CDN) EdgeCast, Santa Monica, CA
+Senior Software Engineer (CDN) Edgio, Santa Monica, CA
 (August 2013 - August 2016)
 
 WAF and Rate-Limiting back office
