@@ -5,22 +5,41 @@ title: libinjection in the browser with wasm
 
 [libinjection](https://github.com/libinjection/libinjection) is a small standalone C library for scanning input strings for possible [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) or [Cross Side Scripting](https://en.wikipedia.org/wiki/Cross-site_scripting) (XSS).  Libraries like libinjection are commonly used with [Web Application Firewalls](https://en.wikipedia.org/wiki/Web_application_firewall) (WAF) for validating/sanitizing client side requests before they encounter server side logic dealing with external/internal resources like database access or server side API calls.
 
+
+### Compiling wasm
+
+TODO
+
+
+### Passing Strings
+
+TODO
+
+---
+
 ### Example
 
 In the form below try samples like:
 
 - `default=<script>alert(document.cookie)</script>`
-- `user=-1+union+select+1,2,3,4,5,6,7,8,9,(SELECT+user_pass+FROM+wp_users+WHERE+ID=1)`
+- `user=-1+union+select+1,2,3,(SELECT+user_pass+FROM+wp_users+WHERE+ID=1)`
 
-#### Testing
+#### libinjection version
 <div>
-<h3>libinjection version: <span id="version_field"></span></h3>
-<input id="form_field" type="text" onKeyPress="testOnKeyPress()" onKeyUp="testOnKeyPress()">
-<br>
-<h3>XSS Result:       <span id="xss_show_result"></span></h3>
-<h3>SQLI Result:      <span id="sqli_show_result"></span></h3>
-<h3>SQLI Fingerprint: <span id="sqli_show_fingerprint"></span></h3>
+<h3><span id="version_field"></span></h3>
 </div>
+
+#### Input
+</div>
+<input id="form_field" size="64" type="text" onKeyPress="testOnKeyPress()" onKeyUp="testOnKeyPress()">
+</div>
+
+<div>
+<h4>XSS Result:       <span id="xss_show_result"></span></h4>
+<h4>SQLI Result:      <span id="sqli_show_result"></span></h4>
+<h4>SQLI Fingerprint: <span id="sqli_show_fingerprint"></span></h4>
+</div>
+
 
 <script>
 // ---------------------------------------------------------
@@ -118,6 +137,12 @@ function display_version() {
   versionField.style.color = "blue";
 };
 </script>
+
+---
+
+### Is this Useful?
+
+_NOPE_!  _Not really_.  It's just a little example of porting a small C library to wasm in the browser.  This provides no protection from injection.  It _could_ be useful for validating strings that could be flagged as potential false positives from WAF's that use libinjection server-side.
 
 
 #### References
