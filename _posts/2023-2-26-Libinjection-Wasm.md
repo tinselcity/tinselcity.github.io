@@ -10,6 +10,20 @@ title: libinjection in the browser with wasm
 
 <h3 id="version_field">Version: ???</h3>
 
+<h5>try something like</h5>
+
+<pre>default=&lt;script&gt;alert(document.cookie)&lt;/script&gt;</pre>
+
+<pre>user=-1+union+select+1,2,3,4,5,6,7,8,9,(SELECT+user_pass+FROM+wp_users+WHERE+ID=1)</pre>
+
+<input id="form_field" type="text" onKeyPress="testOnKeyPress()" onKeyUp="testOnKeyPress()"><br>
+
+<h3>XSS Result:       <span id="xss_show_result"></span></h3>
+
+<h3>SQLI Result:      <span id="sqli_show_result"></span></h3>
+
+<h3>SQLI Fingerprint: <span id="sqli_show_fingerprint"></h3>
+
 <script>
 // ---------------------------------------------------------
 // create shared memory
