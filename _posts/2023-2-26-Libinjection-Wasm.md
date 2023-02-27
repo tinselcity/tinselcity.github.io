@@ -63,6 +63,8 @@ The resulting buffer is pass to the C function:
   ...
 ```
 
+The entirety of the html/code is embedded in the markdown for [this blog post](https://raw.githubusercontent.com/tinselcity/tinselcity.github.io/master/_posts/2023-2-26-Libinjection-Wasm.md).
+
 ---
 
 ### Example
