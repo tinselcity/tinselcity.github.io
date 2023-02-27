@@ -8,12 +8,60 @@ title: libinjection in the browser with wasm
 
 ### Compiling wasm
 
-TODO
+I compiled Libinjection [source](https://github.com/libinjection/libinjection) with [clang](https://clang.llvm.org/) with wasm target (`target=wasm32`).
 
+The compilation line was:
 
-### Passing Strings
+```sh
+clang \
+  --target=wasm32 \
+  --no-standard-libraries \
+  -Wl,--export-all -Wl,--no-entry \
+  -o libinjection.wasm \
+  string.c \
+  ./libinjection_html5.c \
+  ./libinjection_xss.c \
+  ./libinjection_sqli.c
+```
 
-TODO
+I added a few C utilities from `libc` like `memcpy`/`strnlen` etc into a module (`string.c`) for compiling with `--no-stanadard-libraries`.  Other better approaches include linking with [wasi-libc](https://github.com/WebAssembly/wasi-libc) (which include [release assets](https://github.com/WebAssembly/wasi-sdk/releases) for their sdk).  Building generated the [`.wasm` file](https://github.com/tinselcity/tinselcity.github.io/blob/master/dat/blog/2023_2_26_Libinjection_Wasm/libinjection.wasm) for use in the browser application.
+
+There's a lot of great references around the web with `hello world` wasm projects.  I found [this](https://depth-first.com/articles/2019/10/16/compiling-c-to-webassembly-and-running-it-without-emscripten/) one especially helpful.
+
+### Calling from JavaScript
+
+I really need a crash course in JavaScript memory and interoperability with `wasm`.  [Emscripten](https://emscripten.org/) has good utilities for [passing data back and forth](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html#call-compiled-c-c-code-directly-from-javascript), but since I was embedding this in a single page of html sans third-party libs, I built something more basic.
+
+Converting from a string value retrieved from the DOM to a `UInt8` array for passing to a C function:
+
+```js
+function convertFromString(string) {
+  const encoder = new TextEncoder();
+  const bytes = encoder.encode(string)
+  const buffer = new Uint8Array(gWasm.instance.exports.memory.buffer, gMemory, bytes.byteLength + 1)
+  buffer.set(bytes);
+  return buffer
+}
+```
+
+Where the `gWasm` is WebAssembly module compiled and instantiated from the`libinjection.wasm` WebAssembly file.
+
+```js
+  const importObject = {imports: {}};
+  (async () => {
+    gWasm = await WebAssembly.instantiateStreaming(fetch('libinjection.wasm'), importObject);
+  })();
+```
+
+The resulting buffer is pass to the C function:
+
+```js
+  buffer = convertFromString(document.getElementById("form_field").value);
+  xssVal = gWasm.instance.exports.libinjection_xss(buffer.byteOffset, buffer.length);
+  xssField = document.getElementById("xss_show_result");
+  if (xssVal) {
+  ...
+```
 
 ---
 
