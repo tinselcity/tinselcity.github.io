@@ -188,7 +188,7 @@ function display_version() {
 
 ### Is this Useful?
 
-_NOPE_!  _Not really_.  It's just a little example of porting a small C library to wasm in the browser.  This provides no protection from injection.  It _could_ be useful for validating strings that could be flagged as potential false positives from WAF's that use libinjection server-side.
+_NOPE_!  _Not really_.  It's just a little example of porting a small C library to wasm for use in the browser.  This provides no protection from injection or XSS.  It _could_ be useful for validating strings that could be flagged as potential false positives from WAF's that use libraries like libinjection server-side.
 
 
 #### References
