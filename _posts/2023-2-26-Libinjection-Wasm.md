@@ -24,17 +24,13 @@ In the form below try samples like:
 - `default=<script>alert(document.cookie)</script>`
 - `user=-1+union+select+1,2,3,(SELECT+user_pass+FROM+wp_users+WHERE+ID=1)`
 
-#### libinjection version
-<div>
-<h3><span id="version_field"></span></h3>
-</div>
-
 #### Input
-</div>
+<div>
 <input id="form_field" size="64" type="text" onKeyPress="testOnKeyPress()" onKeyUp="testOnKeyPress()">
 </div>
 
 <div>
+<h4>libinjection version: <span id="version_field"></span></h4>
 <h4>XSS Result:       <span id="xss_show_result"></span></h4>
 <h4>SQLI Result:      <span id="sqli_show_result"></span></h4>
 <h4>SQLI Fingerprint: <span id="sqli_show_fingerprint"></span></h4>
