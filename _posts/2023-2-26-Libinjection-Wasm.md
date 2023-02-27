@@ -14,7 +14,7 @@ In the form below try samples like:
 
 #### Testing
 <div>
-<h3 id="version_field">libinjection version: ???</h3>
+<h3>libinjection version: <span id="version_field"></span></h3>
 <input id="form_field" type="text" onKeyPress="testOnKeyPress()" onKeyUp="testOnKeyPress()">
 <br>
 <h3>XSS Result:       <span id="xss_show_result"></span></h3>
@@ -71,23 +71,32 @@ function testOnKeyPress() {
       // xss test
       // ---------------------------------------------------
       xssVal = gWasm.instance.exports.libinjection_xss(buffer.byteOffset, buffer.length);
+      xssField = document.getElementById("xss_show_result");
       if (xssVal) {
-        document.getElementById("xss_show_result").innerText = "INJECTION";
+        xssField.innerText = "INJECTION";
+        xssField.style.color = "red";
       }
       else {
-        document.getElementById("xss_show_result").innerText = "OK";
+        xssField.innerText = "OK";
+        xssField.style.color = "green";
       }
       // ---------------------------------------------------
       // sqli test
       // ---------------------------------------------------
       sqliVal = gWasm.instance.exports.libinjection_sqli(buffer.byteOffset, buffer.length, fingerprint.byteOffset);
+      sqliField = document.getElementById("sqli_show_result");
+      sqliFingerPrint = document.getElementById("sqli_show_fingerprint");
       if (sqliVal) {
-        document.getElementById("sqli_show_result").innerText = "INJECTION";
-        document.getElementById("sqli_show_fingerprint").innerText = fingerprint;
+        sqliField.innerText = "INJECTION";
+        sqliField.style.color = "red";
+        sqliFingerPrint.innerText = fingerprint;
+        sqliFingerPrint.style.color = "red";
       }
       else {
-        document.getElementById("sqli_show_result").innerText = "OK";
-        document.getElementById("sqli_show_fingerprint").innerText = "NONE";
+        sqliField.innerText = "OK";
+        sqliField.style.color = "green";
+        sqliFingerPrint.innerText = "NONE";
+        sqliFingerPrint.style.color = "green";
       }
     } finally {
       delete buffer;
@@ -104,8 +113,9 @@ function display_version() {
     gWasm.instance.exports.libinjection_version_len()
   )
   let l_version = String.fromCharCode.apply(null, l_str);
-  var l_version_field = document.getElementById("version_field");
-  l_version_field.innerText = "libinjection version: " + l_version;
+  var versionField = document.getElementById("version_field");
+  versionField.innerText = l_version;
+  versionField.style.color = "blue";
 };
 </script>
 
