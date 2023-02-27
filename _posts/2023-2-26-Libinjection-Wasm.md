@@ -6,24 +6,26 @@ title: libinjection in the browser with wasm
 [libinjection](https://github.com/libinjection/libinjection) is a small standalone C library for scanning input strings for possible [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) or [Cross Side Scripting](https://en.wikipedia.org/wiki/Cross-site_scripting) (XSS).  Libraries like libinjection are commonly used with [Web Application Firewalls](https://en.wikipedia.org/wiki/Web_application_firewall) (WAF) for validating/sanitizing client side requests before they encounter server side logic dealing with external/internal resources like database access or server side API calls.
 
 
-<h1>libinjection</h1>
+#### References
+- libinjection source: [libinjection](https://github.com/libinjection/libinjection)
+- WebAssemble.Memory: [https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Memory](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Memory)
+- Compiling C to WebAssembly and Running It - without Emscripten: [https://depth-first.com/articles/2019/10/16/compiling-c-to-webassembly-and-running-it-without-emscripten/](https://depth-first.com/articles/2019/10/16/compiling-c-to-webassembly-and-running-it-without-emscripten/)
+- How to Pass Strings Between JavaScript and WebAssembly: [https://rob-blackbourn.github.io/blog/webassembly/wasm/strings/javascript/c/libc/wasm-libc/clang/2020/06/20/wasm-string-passing.html](https://rob-blackbourn.github.io/blog/webassembly/wasm/strings/javascript/c/libc/wasm-libc/clang/2020/06/20/wasm-string-passing.html)
 
-<h3 id="version_field">Version: ???</h3>
 
-<h5>try something like</h5>
+### Example
 
-<pre>default=&lt;script&gt;alert(document.cookie)&lt;/script&gt;</pre>
+In the form below try samples like:
 
-<pre>user=-1+union+select+1,2,3,4,5,6,7,8,9,(SELECT+user_pass+FROM+wp_users+WHERE+ID=1)</pre>
+- `default=<script>alert(document.cookie)</script>`
+- `user=-1+union+select+1,2,3,4,5,6,7,8,9,(SELECT+user_pass+FROM+wp_users+WHERE+ID=1)`
 
+#### Testing
+<h3 id="version_field">libinjection version: ???</h3>
 <input id="form_field" type="text" onKeyPress="testOnKeyPress()" onKeyUp="testOnKeyPress()"><br>
-
 <h3>XSS Result:       <span id="xss_show_result"></span></h3>
-
 <h3>SQLI Result:      <span id="sqli_show_result"></span></h3>
-
 <h3>SQLI Fingerprint: <span id="sqli_show_fingerprint"></h3>
-
 <script>
 // ---------------------------------------------------------
 // create shared memory
@@ -107,12 +109,6 @@ function display_version() {
   )
   let l_version = String.fromCharCode.apply(null, l_str);
   var l_version_field = document.getElementById("version_field");
-  l_version_field.innerText = "Version: " + l_version;
+  l_version_field.innerText = "libinjection version: " + l_version;
 };
 </script>
-
-#### References
-- libinjection source: [libinjection](https://github.com/libinjection/libinjection)
-- WebAssemble.Memory: [https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Memory](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Memory)
-- Compiling C to WebAssembly and Running It - without Emscripten: [https://depth-first.com/articles/2019/10/16/compiling-c-to-webassembly-and-running-it-without-emscripten/](https://depth-first.com/articles/2019/10/16/compiling-c-to-webassembly-and-running-it-without-emscripten/)
-- How to Pass Strings Between JavaScript and WebAssembly: [https://rob-blackbourn.github.io/blog/webassembly/wasm/strings/javascript/c/libc/wasm-libc/clang/2020/06/20/wasm-string-passing.html](https://rob-blackbourn.github.io/blog/webassembly/wasm/strings/javascript/c/libc/wasm-libc/clang/2020/06/20/wasm-string-passing.html)
