@@ -88,7 +88,7 @@ function testOnKeyPress() {
       xssVal = gWasm.instance.exports.libinjection_xss(buffer.byteOffset, buffer.length);
       xssField = document.getElementById("xss_show_result");
       if (xssVal) {
-        xssField.innerText = "INJECTION";
+        xssField.innerText = "DETECTED";
         xssField.style.color = "red";
       }
       else {
@@ -102,7 +102,7 @@ function testOnKeyPress() {
       sqliField = document.getElementById("sqli_show_result");
       sqliFingerPrint = document.getElementById("sqli_show_fingerprint");
       if (sqliVal) {
-        sqliField.innerText = "INJECTION";
+        sqliField.innerText = "DETECTED";
         sqliField.style.color = "red";
         sqliFingerPrint.innerText = fingerprint;
         sqliFingerPrint.style.color = "red";
