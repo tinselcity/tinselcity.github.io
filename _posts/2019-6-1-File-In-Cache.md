@@ -11,29 +11,27 @@ It's possible to write a little program to check the page cache state of a file 
 
 ```c
 // open a file -get size
-int l_fd = open(l_file, O_RDONLY);
-struct stat l_stat = { 0 };
-fstat(l_fd, &l_stat);
+int fd = open(file, O_RDONLY);
+struct stat file_stat = { 0 };
+fstat(fd, &file_stat);
 // mmap file
-void *l_map = mmap(NULL, l_stat.st_size, PROT_READ, MAP_SHARED, l_fd, 0);
+void *map = mmap(NULL, file_stat.st_size, PROT_READ, MAP_SHARED, fd, 0);
 // get system page size
-const long l_ps = sysconf(_SC_PAGESIZE);
+const long ps = sysconf(_SC_PAGESIZE);
 // create state vector
-int l_vec_size = (l_stat.st_size+l_ps-1) / l_ps;
-unsigned char *l_vec = (unsigned char*)malloc(l_vec_size);
+int vec_size = (file_stat.st_size+ps-1) / ps;
+unsigned char *vec = (unsigned char*)malloc(vec_size);
 // mincore on the file and printout percentage used
-l_s = mincore(l_map, l_stat.st_size, l_vec);
-...
+mincore(map, file_stat.st_size, vec);
 ```
 
 After the mincore call the state vector will contain either: 1 if the page resident in memory or 0 if not resident.
 
 Or more precisely from the man page:
 
-```
-On return, the least signif‐icant bit of each byte will be set if the 
-corresponding page is currently resident in memory, and be clear otherwise.
-```
+`
+On return, the least signif‐icant bit of each byte will be set if the corresponding page is currently resident in memory, and be clear otherwise.
+`
 
 
 A little example using a [test program](https://github.com/tinselcity/experiments/tree/master/mincore)
