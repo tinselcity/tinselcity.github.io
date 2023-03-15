@@ -29,10 +29,7 @@ After the mincore call the state vector will contain either: 1 if the page resid
 
 Or more precisely from the man page:
 
-`
-On return, the least signif‐icant bit of each byte will be set if the corresponding page is currently resident in memory, and be clear otherwise.
-`
-
+`On return, the least signif‐icant bit of each byte will be set if the corresponding page is currently resident in memory, and be clear otherwise.`
 
 A little example using a [test program](https://github.com/tinselcity/experiments/tree/master/mincore)
 
