@@ -9,11 +9,9 @@ Linux added support for a `TCP_REPAIR` in setsockopt with kernel version 3.5+ fo
 To "freeze" the connection state prior to closing:
 
 ```c
-// ---------------------------------------------------------
 // use TCP_REPAIR to "freeze" socket state
-// ---------------------------------------------------------
 #ifdef TCP_REPAIR
-setsockopt(a_fd, SOL_TCP, TCP_REPAIR, &l_opt, sizeof(l_opt));
+setsockopt(fd, SOL_TCP, TCP_REPAIR, &opt, sizeof(opt));
 #endif
 ```
 
@@ -41,8 +39,8 @@ sudo tcpdump -i lo 'port 12345'
 16:20:40.904773 IP localhost.39306 > localhost.12345: Flags [.], ack 8, win 342, options [nop,nop,TS val 951609476 ecr 951609432], length 0
 ```
 
-Calling TCP_REPAIR to "freeze" the connection state prior to closing the client socket from the server:
-Running TCP_REPAIR requires the process be `suitably privileged` -thus the `sudo ...`
+Setting `TCP_REPAIR` to "freeze" the connection state prior to closing the client socket from the server:
+Running `TCP_REPAIR` requires the process be `suitably privileged` -thus the `sudo ...`
 
 ```sh
 # freeze before close
