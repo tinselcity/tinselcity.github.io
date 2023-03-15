@@ -163,9 +163,8 @@ nginx-1.23.2>./configure \
 Then just build as usual.
 
 One thing to note [in the nginx code](https://github.com/nginx/nginx/blob/2485681308bd8d3108da31546cb91bb97813a3fb/src/event/ngx_event_openssl.c#L1822) is how nginx tests if `kTLS` is enabled on the socket with the [`BIO_get_ktls_send`](https://www.openssl.org/docs/manmaster/man3/BIO_get_ktls_send.html) function:
-```sh
-BIO_get_ktls_send() returns 1 if the BIO is using the Kernel TLS data-path for sending. Otherwise, it returns zero. BIO_get_ktls_recv() returns 1 if the BIO is using the Kernel TLS data-path for receiving. Otherwise, it returns zero.
-```
+
+`BIO_get_ktls_send() returns 1 if the BIO is using the Kernel TLS data-path for sending. Otherwise, it returns zero. BIO_get_ktls_recv() returns 1 if the BIO is using the Kernel TLS data-path for receiving. Otherwise, it returns zero.`
 
 To configure the server to enable `SSL_sendfile` with `kTLS` (with an `ssl` listener)
 ```perl
