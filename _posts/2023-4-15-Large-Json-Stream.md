@@ -6,7 +6,7 @@ title: streaming large json files with memory constraints
 SUMMARY
 
 
-### Streaming w/ rapidjson
+### Streaming w/ RapidJSON
 
 TODO
 
@@ -25,6 +25,7 @@ Both simdjson and RapidJSON appear to have 4GB single object/file [constraints](
 
 #### References
 
-- Control Group v2: [https://docs.kernel.org/admin-guide/cgroup-v2.html](https://docs.kernel.org/admin-guide/cgroup-v2.html)
-- rapidjson: [https://rapidjson.org/](https://rapidjson.org/)
+- RapidJSON: [https://rapidjson.org](https://rapidjson.org/)
+- simdjson: [https://github.com/simdjson/simdjson](https://github.com/simdjson/simdjson)
+- Linux Control Group v2: [https://docs.kernel.org/admin-guide/cgroup-v2.html](https://docs.kernel.org/admin-guide/cgroup-v2.html)
 
