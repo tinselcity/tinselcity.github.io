@@ -1,10 +1,9 @@
 ---
 layout: post
-title: streaming large json files with memory constraints
+title: Reading large JSON files with memory constraints
 ---
 
-SUMMARY
-
+SUMMARY (TODO)
 
 ### Streaming w/ RapidJSON
 
