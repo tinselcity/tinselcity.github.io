@@ -3,7 +3,29 @@ layout: post
 title: Reading large JSON files with memory constraints
 ---
 
-SUMMARY (TODO)
+I wanted to try code golfing, a problem I saw raised [occasionally](https://news.ycombinator.com/item?id=35042609) about how to read/parse JSON files that were larger than available system memory.  I went with using `mmap` and file streams with filters.
+
+As a contrived hypothetical imagine having to calculate the average balance from a json object like:
+
+```js
+>jq '.' bank_customers.json | head -n10
+{
+  "customers": [
+    {
+      "name": "Mack Donalds",
+      "balance": 111457.33
+    },
+    {
+      "name": "Jack Box",
+      "balance": 78224.50
+    },
+    {
+      "name": "Jimmy John",
+      "balance": -1032.33
+    }
+    ...
+    ...
+```
 
 A basic reader in RapidJSON could look like:
 ```cpp
@@ -55,6 +77,9 @@ systemd-run --user -t -G --wait -p MemoryMax=<max> <cmd+args>
 Constraining the limit of the command to read all of the json at once shows the process was unsuccessful due to [`oom-kill`](https://www.kernel.org/doc/gorman/html/understand/understand016.html):
 
 ```sh
+>ls -l /tmp/big.json 
+-rw-rw-r-- 1 rmorrison rmorrison 1572998392 Apr 15 14:56 /tmp/big.json
+...
 >systemd-run --user -t -G --wait -p MemoryMax=64M \
   /tmp/read_json /tmp/big.json
 Running as unit: run-u8357.service
