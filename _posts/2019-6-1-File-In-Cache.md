@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Checking Page Cache State of File on Linux with mincore
+title: Inspecting file page cache state on Linux with mincore
 ---
 
 The Linux syscall `mincore` can be used to "determine whether pages are resident in memory" -according to the [man page](http://man7.org/linux/man-pages/man2/mincore.2.html) _simple enuff :)_.

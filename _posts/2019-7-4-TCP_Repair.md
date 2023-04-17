@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Silently dropping tcp connections with TCP_REPAIR
+title: Silently dropping TCP connections with TCP_REPAIR
 ---
 
 Inspired by a [post](https://oroboro.com/dealing-with-network-port-abuse-in-sockets-in-c/) from oroboro.com, here's a test program that will silently close tcp connections -ie closing a client connection from a server process without sending `FIN` or `RST`.
