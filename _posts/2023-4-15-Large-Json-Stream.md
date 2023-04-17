@@ -27,7 +27,7 @@ As a contrived hypothetical imagine having to calculate the average balance from
     ...
 ```
 
-A basic reader in RapidJSON could look like:
+A basic reader in [RapidJSON](https://rapidjson.org/) could look like:
 ```cpp
 #define FATAL(...) do { fprintf(stderr, __VA_ARGS__); return -1;} while(0)
 int main(int argc, char **argv) {
