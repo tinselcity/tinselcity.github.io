@@ -16,14 +16,9 @@ As a contrived hypothetical imagine having to calculate the average balance from
       "balance": 111457.33
     },
     {
-      "name": "Jack Box",
-      "balance": 78224.50
-    },
-    {
       "name": "Jimmy John",
-      "balance": -1032.33
+      "balance": -2032.33
     }
-    ...
     ...
 ```
 
