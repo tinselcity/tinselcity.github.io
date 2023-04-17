@@ -3,7 +3,7 @@ layout: post
 title: Reading large JSON files with memory constraints
 ---
 
-I wanted to try code golfing, a problem I saw raised [occasionally](https://news.ycombinator.com/item?id=35042609) about how to read/parse JSON files that were larger than available system memory.  I went with using `mmap` and file streams with filters.
+I wanted to try code golfing a problem I saw raised [occasionally](https://news.ycombinator.com/item?id=35042609) about how to read/parse JSON files that were larger than available system memory.  I went with using `mmap` and file streams with filters.
 
 As a contrived hypothetical, imagine having to calculate the average balance from a json object like:
 
