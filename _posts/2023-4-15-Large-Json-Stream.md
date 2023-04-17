@@ -54,7 +54,8 @@ systemd-run --user -t -G --wait -p MemoryMax=<max> <cmd+args>
 Constraining the limit of the command to read all of the json at once shows the process was unsuccessful due to [`oom-kill`](https://www.kernel.org/doc/gorman/html/understand/understand016.html):
 
 ```sh
->systemd-run --user -t -G --wait -p MemoryMax=64M /tmp/read_json /tmp/big.json
+>systemd-run --user -t -G --wait -p MemoryMax=64M \
+  /tmp/read_json /tmp/big.json
 Running as unit: run-u8357.service
 Press ^] three times within 1s to disconnect TTY.
 Finished with result: oom-kill
@@ -79,7 +80,8 @@ int main(int argc, char **argv) {
   rapidjson::Reader reader;
   rapidjson::ParseResult ok = reader.Parse(ss, handler);
   if (!ok) {
-    FATAL("error parsing json. Reason[%d]: %s\n", (int)ok.Offset(), rapidjson::GetParseError_En(ok.Code()));
+    FATAL("error parsing json. Reason[%d]: %s\n",
+      (int)ok.Offset(), rapidjson::GetParseError_En(ok.Code()));
   }  
   printf("average balance: %.2f\n", handler.avg_balance);
   munmap(buf, buf_len);
@@ -116,7 +118,8 @@ struct jshandler {
 
 Running the streaming version of the JSON reader w/ memory limits:
 ```sh
->systemd-run --user -t -G --wait -p MemoryMax=64M /tmp/read_json_stream /tmp/big.json
+>systemd-run --user -t -G --wait -p MemoryMax=64M \
+  /tmp/read_json_stream /tmp/big.json
 Running as unit: run-u8358.service
 Press ^] three times within 1s to disconnect TTY.
 average balance: 494901.69
