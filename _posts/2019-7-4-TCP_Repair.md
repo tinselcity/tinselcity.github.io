@@ -40,8 +40,8 @@ sudo tcpdump -i lo 'port 12345'
 16:20:40.904773 IP localhost.39306 > localhost.12345: Flags [.], ack 8, win 342, options [nop,nop,TS val 951609476 ecr 951609432], length 0
 ```
 
-Setting `TCP_REPAIR` to "freeze" the connection state prior to closing the client socket from the server:
-Running `TCP_REPAIR` requires the process be `suitably privileged` -thus the `sudo ...`
+Setting `TCP_REPAIR` to "freeze" the connection state prior to closing the client socket from the server: (`TCP_REPAIR` requires the process be `suitably privileged` -thus `sudo` ...)
+
 
 ```sh
 # freeze before close
@@ -60,7 +60,9 @@ Running `tcpdump`:
 16:22:42.235398 IP localhost.12345 > localhost.39312: Flags [P.], seq 1:7, ack 7, win 342, options [nop,nop,TS val 951730806 ecr 951730806], length 6
 16:22:42.235411 IP localhost.39312 > localhost.12345: Flags [.], ack 7, win 342, options [nop,nop,TS val 951730806 ecr 951730806], length 0
 ```
-Note the lack of a server->client `FIN` message in the latter example.  The potential idea here being, it may be possible to exhaust client system resources like number of open file descriptors -if it's possible to leave the tcp connections half-open.
+Note the lack of a server->client `FIN` message in the latter example.  
+
+The potential idea here being, it may be possible to exhaust client system resources like number of open file descriptors -if it's possible to leave the tcp connections half-open.
 
 #### References
 
