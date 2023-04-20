@@ -5,7 +5,7 @@ title: Checking object is POD
 
 A [coworker](https://twitter.com/daveisangry) showed me a neat trick to check at compile time whether a class/struct was POD.  `va_arg` does not allow non-POD arguments to be passed in.  He wrote a little compile time check that could be embedded in functions or even the class/struct declarations themselves.  This is not portable -it’s worked in g++ 4.6.3 on my linux box, but does not work in VC++ (MSVC++ apparently is quite happy to pass non-POD objects through va_arg.
 
-- the `if(0)` ought to compile out -w/ any optimization level
+The `if(0)` ought to compile out -w/ any optimization level
 
 ```cpp
 // Includes
@@ -32,20 +32,20 @@ Compiling a little example like this:
 
 ```cpp
 #include <string>
-#include "check_for_pod.hpp"
+#include "check_for_pod.h"
   
 // Types...
 class my_cool_pod_class {
-    int m_a;
-    int m_b;
-    int m_c;
+    int a;
+    int b;
+    int c;
 };
   
 class my_cool_non_pod_class {
-    int m_a;
-    int m_b;
-    int m_c;
-    std::string m_str;
+    int a;
+    int b;
+    int c;
+    std::string str;
 };
   
 // Main...
@@ -68,6 +68,6 @@ check_for_pod.cpp:46:5: error: cannot pass objects of non-trivially-copyable typ
 
 [Link to examples](https://github.com/tinselcity/experiments/tree/master/check_for_pod)
 
-#### References:
+#### References
 
-1. [POD Types in C++11 (StackOverflow)](https://stackoverflow.com/questions/4178175/what-are-aggregates-and-pods-and-how-why-are-they-special/7189821#7189821)
+- [POD Types in C++11 (StackOverflow)](https://stackoverflow.com/questions/4178175/what-are-aggregates-and-pods-and-how-why-are-they-special/7189821#7189821)

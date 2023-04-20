@@ -3,7 +3,7 @@ layout: post
 title: Inspecting file page cache state on Linux with mincore
 ---
 
-The Linux syscall `mincore` can be used to "determine whether pages are resident in memory" -according to the [man page](http://man7.org/linux/man-pages/man2/mincore.2.html) _simple enuff :)_.
+The Linux syscall `mincore` can be used to "determine whether pages are resident in memory" -according to the [man page](http://man7.org/linux/man-pages/man2/mincore.2.html). -_simple enuff :)_
 
 `mincore() returns a vector that indicates whether pages of the calling process's virtual memory are resident in core (RAM),...`
 
@@ -15,7 +15,11 @@ int fd = open(file, O_RDONLY);
 struct stat file_stat = { 0 };
 fstat(fd, &file_stat);
 // mmap file
-void *map = mmap(NULL, file_stat.st_size, PROT_READ, MAP_SHARED, fd, 0);
+void *map = mmap(NULL,
+  file_stat.st_size,
+  PROT_READ, MAP_SHARED,
+  fd,
+  0);
 // get system page size
 const long ps = sysconf(_SC_PAGESIZE);
 // create state vector
@@ -52,7 +56,7 @@ file: /tmp/nasa.xml is 0.00% in page cache
 file: /tmp/nasa.xml is 21.91% in page cache
 ```
 
-#### References:
+#### References
 
 - [mincore man](http://man7.org/linux/man-pages/man2/mincore.2.html)
 - [vmtouch -the Virtual Memory Toucher](https://hoytech.com/vmtouch/)

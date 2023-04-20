@@ -51,6 +51,8 @@ HELLO
 HELLO
 ```
 
+Running `tcpdump`:
+
 ```sh
 16:22:42.235345 IP localhost.39312 > localhost.12345: Flags [P.], seq 1:7, ack 1, win 342, options [nop,nop,TS val 951730806 ecr 951724587], length 6
 16:22:42.235370 IP localhost.12345 > localhost.39312: Flags [.], ack 7, win 342, options [nop,nop,TS val 951730806 ecr 951730806], length 0
@@ -59,7 +61,7 @@ HELLO
 ```
 Note the lack of a server->client `FIN` message in the latter example.  The potential idea here being, it may be possible to exhaust client system resources like number of open file descriptors -if it's possible to leave the tcp connections half-open.
 
-#### References:
+#### References
 
-1. [TCP connection repair](https://lwn.net/Articles/495304/)
-2. [Dealing with Network Port Abuse in Sockets in C++](https://oroboro.com/dealing-with-network-port-abuse-in-sockets-in-c/)
+- [TCP connection repair](https://lwn.net/Articles/495304/)
+- [Dealing with Network Port Abuse in Sockets in C++](https://oroboro.com/dealing-with-network-port-abuse-in-sockets-in-c/)
