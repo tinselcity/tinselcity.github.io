@@ -5,7 +5,8 @@ title: Silently dropping TCP connections with TCP_REPAIR
 
 Inspired by a [post](https://oroboro.com/dealing-with-network-port-abuse-in-sockets-in-c/) from oroboro.com, here's a test program that will silently close tcp connections -ie closing a client connection from a server process without sending `FIN` or `RST`.
 
-Linux added support for a `TCP_REPAIR` in setsockopt with kernel version 3.5+ for the pupose supporting live migration of active connections.
+Linux added support for `TCP_REPAIR` in `setsockopt` with kernel version 3.5+ to support live migration of active connections.
+
 To "freeze" the connection state prior to closing:
 
 ```c
