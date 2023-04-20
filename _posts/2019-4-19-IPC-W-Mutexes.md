@@ -10,9 +10,9 @@ The steps to create a shared mutex are to: open file at path, pre-allocate/mmap 
 #### Create Shared Mutex
 
 ```c
-int create_mutex(pthread_mutex_t **mutex) {
+void create_mutex(pthread_mutex_t **mutex) {
     // Open file to back mutex object
-    int mmap_fd = mmap_fd = open(MY_COOL_MUTEX_FILE,
+    int mmap_fd = open(MY_COOL_MUTEX_FILE,
       O_RDWR | O_CREAT,
       0666);
     // Allocate and map into memory
@@ -28,22 +28,22 @@ int create_mutex(pthread_mutex_t **mutex) {
     pthread_mutexattr_setpshared(&mutex_attr,
       PTHREAD_PROCESS_SHARED);
     pthread_mutex_init(*mutex, &mutex_attr);
-    return 0;
+    // TODO error checking!
 }
 ```
 
 #### Open Shared Mutex
  
 ```c
-int open_mutex(pthread_mutex_t **mutex) {
+void open_mutex(pthread_mutex_t **mutex) {
     // Open file to back mutex object
-    int mmap_fd = mmap_fd = open(MY_COOL_MUTEX_FILE, O_RDWR);
+    int mmap_fd = open(MY_COOL_MUTEX_FILE, O_RDWR);
     *mutex = mmap(NULL,
       sizeof(pthread_mutex_t),
       PROT_READ | PROT_WRITE, MAP_SHARED,
       mmap_fd,
       0);
-    return 0;
+    // TODO error checking!
 }
 ```
 
