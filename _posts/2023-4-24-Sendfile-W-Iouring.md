@@ -8,11 +8,11 @@ I was excited by the [flurry](https://despairlabs.com/blog/posts/2021-06-16-io-u
 
 ### Submission Queue's / Completion Queue's
 
-In brief (because [no one has ever written a server](https://github.com/search?q=io_uring_submit) with `io_uring` /s), dealing with I/O is usually synchronous or blocking or asynchronous or non-blocking.
+In brief (because [no one has ever written a server](https://github.com/search?q=io_uring_submit) with `io_uring` /s), dealing with I/O is usually synchronous (_blocking_) or asynchronous (_non-blocking_).  ~Blocking from the perspective of the execution context (coroutines and yielding non-withstanding).
 
 In a blocking model, the application blocks waiting for the system or OS to return requested resources before proceeding.
 
-```
+```python
 # accept connection
 int fd = accept(...
 # read request
@@ -25,7 +25,7 @@ write(response...
 
 With asynchronous programs, the program waits for activity, and handles state.
 
-```
+```python
 # wait forever for events
 while events = select(... >= 0)
   for event in events
@@ -71,6 +71,10 @@ while (io_uring_wait_cqe(&ring, cqe,...
 ```
 
 The application chains submissions, and in some cases resubmits (for `accept` to the "submission" queue and waits for any completed/failed calls from the "completion queue".
+
+### Splicing w/ `io_uring`
+
+TODO
 
 ### Future Directions
 
