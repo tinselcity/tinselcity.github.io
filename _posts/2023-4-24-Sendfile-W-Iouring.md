@@ -3,14 +3,13 @@ layout: post
 title: Sendfile with io_uring (almost)
 ---
 
-I was excited by the [flurry](https://despairlabs.com/blog/posts/2021-06-16-io-uring-is-not-an-event-system/) of [discussions](https://developers.redhat.com/articles/2023/04/12/why-you-should-use-iouring-network-io) around `io_uring` development, and wanted to try writing basic efficient HTTP file server (where a `sendfile` like behavior was ["left as an exercise for the reader"](https://lwn.net/Articles/810491/)).
-
+Inspired by the [flurry](https://despairlabs.com/blog/posts/2021-06-16-io-uring-is-not-an-event-system/) of [discussions](https://developers.redhat.com/articles/2023/04/12/why-you-should-use-iouring-network-io) around `io_uring` development, I wanted to try writing a basic efficient HTTP file server with [liburing](https://github.com/axboe/liburing), and especially with `sendfile` functionality, since it was ["left as an exercise for the reader"](https://lwn.net/Articles/810491/).
 
 ### Submission Queue's / Completion Queue's
 
-In brief (because [no one has ever written a server](https://github.com/search?q=io_uring_submit) with `io_uring` /s), dealing with I/O is usually synchronous (_blocking_) or asynchronous (_non-blocking_).  ~Blocking from the perspective of the execution context (coroutines and yielding non-withstanding).
+In brief (because [no one has ever written a server](https://github.com/search?q=io_uring_submit) with `io_uring` /s), dealing with I/O is usually synchronous (_blocking_) or asynchronous (_non-blocking_).  ~Blocking from the perspective of the execution context (yielding coroutines non-withstanding).
 
-In a blocking model, the application blocks waiting for the system or OS to return requested resources before proceeding.
+In a blocking model, the application blocks, waiting for the OS to return requested resources before proceeding.
 
 ```python
 # accept connection
