@@ -156,7 +156,7 @@ Just as a sanity check verifying results against std reader w/o memory limits:
 average balance: 494901.69
 ```
 
-Links to code:
+Link to code:
 [https://github.com/tinselcity/experiments/tree/master/big_json](https://github.com/tinselcity/experiments/tree/master/big_json)
 
 ### Notes
