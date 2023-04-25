@@ -35,7 +35,7 @@ while events = select(... >= 0)
 ...  
 ```
 
-`io_uring` (and especially [liburing](https://github.com/axboe/liburing)) _feel_ like the asynchronous paradigm, of issuing non-blocking I/O calls, but the key difference being instead of making the calls directly, I/O syscalls are "submitted" to a "queue", and the application can block pending "completion" of these requested syscalls. 
+`io_uring` (and especially [liburing](https://github.com/axboe/liburing)) _feels_ like the asynchronous paradigm, of issuing non-blocking I/O calls, but the key difference being instead of making the calls directly, I/O syscalls are "submitted" to a "queue", and the application can block pending "completion" of these requested syscalls.
 
 ![img](https://github.com/tinselcity/tinselcity.github.io/blob/master/images/io_uring.jpg?raw=true "io_uring")
 *Source: https://medium.com/nttlabs/rust-async-with-io-uring-db3fa2642dd4*
@@ -83,7 +83,7 @@ The HTTP server example above _almost_ avoids calling syscalls directly with the
 
 #### `kTLS`
 
-In reality, IPC with anything other than [localhost](https://en.wikipedia.org/wiki/Localhost) would probably require a layer of security, ie [ipsec](https://en.wikipedia.org/wiki/IPsec), [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) etc.  In the example of an network proxy or an HTTP file server, to be efficient about copying with fewer context switches, [Kernel TLS Offload](https://docs.kernel.org/networking/tls-offload.html) (`kTLS`) could be used to encrypt/decrypt directly in the kernel.   The [kLoop](https://github.com/fantix/kloop) project is an example of a project using both `io_uring` and `kTLS`
+In reality, IPC with anything other than [localhost](https://en.wikipedia.org/wiki/Localhost) would probably require a layer of security, ie [ipsec](https://en.wikipedia.org/wiki/IPsec), [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) etc.  In the example of a network proxy or an HTTP file server, to be efficient about copying with fewer context switches, [Kernel TLS Offload](https://docs.kernel.org/networking/tls-offload.html) (`kTLS`) could be used to encrypt/decrypt directly in the kernel.   The [kLoop](https://github.com/fantix/kloop) project is an example of a project using both `io_uring` and `kTLS`
 
 Link to code:
 [https://github.com/tinselcity/hignx/blob/main/hignx_uring.c](https://github.com/tinselcity/hignx/blob/main/hignx_uring.c)
