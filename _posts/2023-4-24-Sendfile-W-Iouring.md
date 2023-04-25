@@ -87,6 +87,10 @@ while (io_uring_wait_cqe(&ring, cqe,...
     io_uring_prep_writev(sqe, ...
     io_uring_submit(ring)
   ...
+
+  # mark entry as seen -return for reuse in ring buffer
+  io_uring_cqe_seen(&ring, cqe);
+
 ```
 
 The application chains submissions, and in some cases resubmits (for `accept`) to the submission queue and waits for any completed/failed calls from the completion queue.
