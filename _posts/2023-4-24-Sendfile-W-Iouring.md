@@ -69,7 +69,7 @@ while (io_uring_wait_cqe(&ring, cqe,...
   ...
 ```
 
-The application chains submissions, and in some cases resubmits (for `accept` to the "submission" queue and waits for any completed/failed calls from the "completion queue".
+The application chains submissions, and in some cases resubmits (for `accept`) to the "submission" queue and waits for any completed/failed calls from the "completion queue".
 
 ### Splicing w/ `io_uring`
 
