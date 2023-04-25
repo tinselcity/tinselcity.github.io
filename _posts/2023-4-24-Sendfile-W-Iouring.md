@@ -5,40 +5,60 @@ title: Sendfile with io_uring (almost)
 
 Inspired by the [flurry](https://despairlabs.com/blog/posts/2021-06-16-io-uring-is-not-an-event-system/) of [discussions](https://developers.redhat.com/articles/2023/04/12/why-you-should-use-iouring-network-io) around `io_uring` development, I wanted to try writing a basic efficient HTTP file server with [liburing](https://github.com/axboe/liburing), and especially with `sendfile` functionality, since it was ["left as an exercise for the reader"](https://lwn.net/Articles/810491/).
 
-### Submission Queue's / Completion Queue's
+### Blocking vs Non-Blocking
 
 In brief (because [no one has ever written a server](https://github.com/search?q=io_uring_submit) with `io_uring` /s), dealing with I/O is usually synchronous (_blocking_) or asynchronous (_non-blocking_).  ~Blocking from the perspective of the execution context (yielding coroutines non-withstanding).
 
-In a blocking model, the application blocks, waiting for the OS to return requested resources before proceeding.
+In a blocking model, the application blocks inline on system calls, halting/waiting for the OS to return requested resources before proceeding.
+
+The psuedo code for a blocking TCP server might look like:
 
 ```python
-# accept connection
-int fd = accept(...
-# read request
-read(fd, ...
-# handle request
-<parse request...>
-# write response
-write(response...
+while true:
+
+  # accept connection
+  fd = accept(listen.fd, ...
+
+  # read request
+  read(fd, ...
+  # handle request
+
+  # write response
+  write(response...
 ```
 
-With asynchronous programs, the program waits for activity, and handles state.
+As opposed to an asynchronous or non-blocking service, which wakes up on events like: "is readable", "is writeable", timed-out etc.  The event based program services requests per event with something like a state machine -picking up where it last left off, before the OS told the program to try again later (`EAGAIN`/`EWOULDBLOCK`).
 
+The general shape of an async TCP server might be:
 ```python
-# wait forever for events
-while events = select(... >= 0)
+while true:
+
+  # wait forever for events
+  events = select(...)
   for event in events
-    if event.type == READ:
-      read(event.fd, ...
-    elif event.type == WRITE:
+
+    if event.type == READABLE:
+      if event.fd == listen.fd:
+        fd = accept(listen.fd, ...
+      else:
+        read(event.fd, ...
+        # handle request
+        # start write response
+        write(event.fd,...
+
+    elif event.type == WRITEABLE:
       write(event.fd,...
 ...  
 ```
+
+### Submission Queues and Completion Queues
 
 `io_uring` (and especially [liburing](https://github.com/axboe/liburing)) _feels_ like the asynchronous paradigm, of issuing non-blocking I/O calls, but the key difference being instead of making the calls directly, I/O syscalls are "submitted" to a "queue", and the application can block pending "completion" of these requested syscalls.
 
 ![img](https://github.com/tinselcity/tinselcity.github.io/blob/master/images/io_uring.jpg?raw=true "io_uring")
 *Source: https://medium.com/nttlabs/rust-async-with-io-uring-db3fa2642dd4*
+
+A TCP server w/ `io_uring` (liburing) might look like
 
 ```python
 # prime the pump with a first submission
@@ -61,15 +81,15 @@ while (io_uring_wait_cqe(&ring, cqe,...
     io_uring_submit(ring)
 
   if cqe.type == READ:
-    <handle read request data>
-    # submit write request
+    # handle request
+    # submit write request (for response)
     sqe = io_uring_get_sqe(&ring)
     io_uring_prep_writev(sqe, ...
     io_uring_submit(ring)
   ...
 ```
 
-The application chains submissions, and in some cases resubmits (for `accept`) to the "submission" queue and waits for any completed/failed calls from the "completion queue".
+The application chains submissions, and in some cases resubmits (for `accept`) to the submission queue and waits for any completed/failed calls from the completion queue.
 
 ### Splicing w/ `io_uring`
 
