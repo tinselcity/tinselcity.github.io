@@ -114,7 +114,7 @@ splice(file_fd, mypipe[1], file_size)
 splice(mypipe[0], conn_fd, file_size)
 ```
 
-I implemented a basic blocking version of this in my code, but it's possible to get non-blocking behavior with splice with the flag `SPLICE_F_NONBLOCK`.  I think this might require `O_NONBLOCK`to be [specified on the pipe descriptors as well](https://groups.google.com/g/fa.linux.kernel/c/MM9TRl0jCcM).
+I implemented a basic blocking version of this in my code, but it's possible to get non-blocking behavior with splice with the flag `SPLICE_F_NONBLOCK`.  I think this might require `O_NONBLOCK` to be [specified on the pipe descriptors as well](https://groups.google.com/g/fa.linux.kernel/c/MM9TRl0jCcM).
 
 #### Running
 
@@ -160,12 +160,12 @@ io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
 
 Non-withstanding the `pipe2` call, a server written like this could be pretty efficient, and cut down context switching if calls can be coalesced.
 
-Proper high perforamnce usage of `io_uring` (and liburing) appears to still be tricky, especially in the context of [reactors](https://github.com/tinselcity/is2#the-reactor) and using timers/timeouts w/ `io_uring_submit_and_wait_timeout`.
+Proper high performance usage of `io_uring` (and liburing) appears to still be tricky, especially in the context of [reactors](https://github.com/tinselcity/is2#the-reactor) and using timers/timeouts w/ `io_uring_submit_and_wait_timeout`.
 
 See issues:
 
 - "io_uring" is slower than epoll: [https://github.com/axboe/liburing/issues/189](https://github.com/axboe/liburing/issues/189)
-- "https://github.com/axboe/liburing/issues/536" [https://github.com/axboe/liburing/issues/536](https://github.com/axboe/liburing/issues/536)
+- "Yet another comparison... w/ epoll..." [https://github.com/axboe/liburing/issues/536](https://github.com/axboe/liburing/issues/536)
 
 ### Future Directions
 
