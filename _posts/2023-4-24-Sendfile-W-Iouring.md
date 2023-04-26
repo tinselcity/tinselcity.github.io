@@ -96,7 +96,95 @@ The application chains submissions, and in some cases resubmits (for `accept`) t
 
 ### Splicing w/ `io_uring`
 
-TODO
+According to [Jens Axboe](https://en.wikipedia.org/wiki/Jens_Axboe) author of both [`splice(2)`](https://man7.org/linux/man-pages/man2/splice.2.html) and `io_uring` (and liburing):
+
+[_"As soon as the splice stuff is integrated, you'll have just that. When I initially wrote splice, at the same time I turned sendfile() into a simple wrapper around it. So if you have splice, you have sendfile as well."_](https://lwn.net/Articles/810491/)
+
+[`splice`](https://en.wikipedia.org/wiki/Splice_(system_call)) "moves data between a file description and a pipe without a round trip to user space".  In order to copy data between a file (file descriptor) and a client connection, we'll need a [`pipe(2)`](https://man7.org/linux/man-pages/man2/pipe.2.html) in between.
+
+The implementation in psuedo code could be:
+```sh
+# create pipe
+pipe(&mypipe)
+
+# splice from file to the "write end of the pipe" [1]
+splice(file_fd, mypipe[1], file_size)
+
+# splice from the "read end of the pipe" [0] to client connection
+splice(mypipe[0], conn_fd, file_size)
+```
+
+I implemented a basic blocking version of this in my code, but it's possible to get non-blocking behavior with splice with the flag `SPLICE_F_NONBLOCK`.  I think this might require `O_NONBLOCK`to be [specified on the pipe descriptors as well](https://groups.google.com/g/fa.linux.kernel/c/MM9TRl0jCcM).
+
+#### Running
+
+```sh
+~/gproj/experiments/hignx>./hignx_uring --debug
+hignx_uring.c:main.432: accept(5)
+hignx_uring.c:main.611: read(89)
+hignx_uring.c:main.478: statx(0)
+hignx_uring.c:main.514: open(6)
+hignx_uring.c:main.674: send(142)
+hignx_uring.c:main.694: splice(361)
+hignx_uring.c:main.694: splice(361)
+hignx_uring.c:main.611: read(0)
+hignx_uring.c:main.714: close(0)
+```
+
+```sh
+>curl localhost:12345/index.html -v
+*   Trying 127.0.0.1:12345...
+* Connected to localhost (127.0.0.1) port 12345 (#0)
+> GET /index.html HTTP/1.1
+...
+>
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Server: hignx/0.0.0
+< Date: Wed, 26 Apr 2023 21:11:35 GMT
+< Content-Type: text/html
+...
+<
+<!DOCTYPE html>
+<html>
+<head>
+...
+```
+
+### Almost but not quite...
+
+It's _almost_ possible to write an HTTP server with `sendfile` behavior using just `io_uring` with the current single exception of `pipe2`, to create a pipe between the file object and the client connection object.
+
+```sh
+# stracing server serving client requests
+# >curl localhost:12345/index.html
+>strace ./hignx_uring
+...
+io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
+io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
+io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
+io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
+pipe2([58, 59], 0)                      = 0
+io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
+io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
+...
+io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
+io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
+io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
+pipe2([61, 62], 0)                      = 0
+io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
+io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
+...
+```
+
+Non-withstanding the `pipe2` call, a server written like this could be pretty efficient, and cut down context switching if calls can be coalesced.
+
+Proper high perforamnce usage of `io_uring` (and liburing) appears to still be tricky, especially in the context of [reactors](https://github.com/tinselcity/is2#the-reactor) and using timers/timeouts w/ `io_uring_submit_and_wait_timeout`.
+
+See issues:
+
+- "io_uring" is slower than epoll: [https://github.com/axboe/liburing/issues/189](https://github.com/axboe/liburing/issues/189)
+- "https://github.com/axboe/liburing/issues/536" [https://github.com/axboe/liburing/issues/536](https://github.com/axboe/liburing/issues/536)
 
 ### Future Directions
 
@@ -110,6 +198,8 @@ In reality, IPC with anything other than [localhost](https://en.wikipedia.org/wi
 
 Link to code:
 [https://github.com/tinselcity/experiments/blob/master/hignx/hignx_uring.c](https://github.com/tinselcity/experiments/blob/master/hignx/hignx_uring.c)
+
+_Thanks so much to Jacky Yin for their post [clarifying splice usage with io_uring](https://medium.com/@7FrogTW/high-performance-server-static-file-serving-967363685407)_
 
 #### References
 
