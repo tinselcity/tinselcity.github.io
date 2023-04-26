@@ -119,6 +119,7 @@ I implemented a basic blocking version of this in my code, but it's possible to 
 #### Running
 
 ```sh
+# >curl localhost:12345/index.html -v
 ~/gproj/experiments/hignx>./hignx_uring --debug
 hignx_uring.c:main.432: accept(5)
 hignx_uring.c:main.611: read(89)
@@ -129,26 +130,6 @@ hignx_uring.c:main.694: splice(361)
 hignx_uring.c:main.694: splice(361)
 hignx_uring.c:main.611: read(0)
 hignx_uring.c:main.714: close(0)
-```
-
-```sh
->curl localhost:12345/index.html -v
-*   Trying 127.0.0.1:12345...
-* Connected to localhost (127.0.0.1) port 12345 (#0)
-> GET /index.html HTTP/1.1
-...
->
-* HTTP 1.0, assume close after body
-< HTTP/1.0 200 OK
-< Server: hignx/0.0.0
-< Date: Wed, 26 Apr 2023 21:11:35 GMT
-< Content-Type: text/html
-...
-<
-<!DOCTYPE html>
-<html>
-<head>
-...
 ```
 
 ### Almost but not quite...
