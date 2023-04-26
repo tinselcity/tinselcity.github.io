@@ -158,7 +158,7 @@ io_uring_enter(4, 1, 0, 0, NULL, 8)     = 1
 ...
 ```
 
-Non-withstanding the `pipe2` call, a server written like this could be pretty efficient, and cut down context switching if calls can be coalesced.
+Aside from the direct `pipe2` call, a server written like this could be pretty efficient, and cut down context switching if calls can be coalesced.
 
 Proper high performance usage of `io_uring` (and liburing) appears to still be tricky, especially in the context of [reactors](https://github.com/tinselcity/is2#the-reactor) and using timers/timeouts w/ `io_uring_submit_and_wait_timeout`.
 
