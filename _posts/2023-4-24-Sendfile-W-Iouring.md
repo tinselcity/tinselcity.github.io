@@ -23,8 +23,8 @@ while true:
   read(fd, ...
   # handle request
 
-  # write response
-  write(response...
+  # write response back
+  write(fd, ...
 ```
 
 As opposed to an asynchronous or non-blocking service, which wakes up on events like: "is readable", "is writeable", timed-out etc.  The event based program services requests per event with something like a state machine -picking up where it last left off, before the OS told the program to try again later (`EAGAIN`/`EWOULDBLOCK`).
