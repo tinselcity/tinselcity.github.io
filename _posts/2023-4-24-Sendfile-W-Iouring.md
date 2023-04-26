@@ -96,7 +96,7 @@ The application chains submissions, and in some cases resubmits (for `accept`) t
 
 ### Splicing w/ `io_uring`
 
-According to [Jens Axboe](https://en.wikipedia.org/wiki/Jens_Axboe) author of both [`splice(2)`](https://man7.org/linux/man-pages/man2/splice.2.html) and `io_uring` (and liburing):
+According to [Jens Axboe](https://en.wikipedia.org/wiki/Jens_Axboe) author of both [`splice(2)`](https://man7.org/linux/man-pages/man2/splice.2.html) and `io_uring` (and liburing) with regard to [`sendfile(2)`](https://man7.org/linux/man-pages/man2/sendfile.2.html) support for `io_uring`:
 
 [_"As soon as the splice stuff is integrated, you'll have just that. When I initially wrote splice, at the same time I turned sendfile() into a simple wrapper around it. So if you have splice, you have sendfile as well."_](https://lwn.net/Articles/810491/)
 
