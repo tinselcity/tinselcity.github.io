@@ -7,7 +7,7 @@ Inspired by the [flurry](https://despairlabs.com/blog/posts/2021-06-16-io-uring-
 
 ### Blocking vs Non-Blocking
 
-In brief (because [no one has ever written a server](https://github.com/search?q=io_uring_submit) with `io_uring` /s), dealing with I/O is usually synchronous (_blocking_) or asynchronous (_non-blocking_).  ~Blocking from the perspective of the execution context (yielding coroutines non-withstanding).
+In brief (because [no one has ever written a server](https://github.com/search?q=io_uring_submit) with `io_uring` /s), dealing with I/O is usually synchronous (_blocking_) or asynchronous (_non-blocking_).  ~Blocking from the perspective of the execution context (yielding coroutines notwithstanding).
 
 In a blocking model, the application blocks inline on system calls, halting/waiting for the OS to return requested resources before proceeding.
 
