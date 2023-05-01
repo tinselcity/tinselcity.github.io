@@ -100,7 +100,7 @@ According to [Jens Axboe](https://en.wikipedia.org/wiki/Jens_Axboe) author of bo
 
 [_"As soon as the splice stuff is integrated, you'll have just that. When I initially wrote splice, at the same time I turned sendfile() into a simple wrapper around it. So if you have splice, you have sendfile as well."_](https://lwn.net/Articles/810491/)
 
-[`splice`](https://en.wikipedia.org/wiki/Splice_(system_call)) "moves data between a file description and a pipe without a round trip to user space".  In order to copy data between a file (file descriptor) and a client connection, we'll need a [`pipe(2)`](https://man7.org/linux/man-pages/man2/pipe.2.html) in between.
+[`splice`](https://en.wikipedia.org/wiki/Splice_(system_call)) "moves data between a file descriptor and a pipe without a round trip to user space".  In order to copy data between a file (file descriptor) and a client connection, we'll need a [`pipe(2)`](https://man7.org/linux/man-pages/man2/pipe.2.html) in between.
 
 The implementation in psuedo code could be:
 ```sh
