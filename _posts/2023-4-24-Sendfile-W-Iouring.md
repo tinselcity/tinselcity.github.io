@@ -116,7 +116,39 @@ splice(mypipe[0], conn_fd, file_size)
 
 I implemented a basic blocking version of this in my code, but it's possible to get non-blocking behavior with splice with the flag `SPLICE_F_NONBLOCK`.  I think this might require `O_NONBLOCK` to be [specified on the pipe descriptors as well](https://groups.google.com/g/fa.linux.kernel/c/MM9TRl0jCcM).
 
+### Coalescing and Chaining
+
+One of the performance advantages from using `io_uring` comes from being able to submit multiple syscalls for a given single `io_uring_enter`, meaning the user application process makes fewer context switches.
+
+For the HTTP file server, I'd like to, in a single submission, send the response headers and kick off the sending of the body data from a file on disk.  The caveat with this approach of submitting multiple calls is that they're [not guaranteed by the API to run in order by default](https://unixism.net/loti/low_level.html#correlating-completions-with-submissions).  _This wouldn't be great in this case to send body data prior to the response headers..._
+
+To enforce ordering between multiple calls set the `IOSQE_IO_LINK` flag in the submission queue entry per entry to [chain submissions together](https://unixism.net/loti/tutorial/link_liburing.html#link-liburing) until the last entry in the chain.
+
+To submit 3 chained calls:
+
+```python
+# first submission
+sqe = io_uring_get_sqe(ring);
+io_uring_prep_xxx(sqe, ...
+sqe->flags |= IOSQE_IO_LINK;
+...
+# second submission
+sqe = io_uring_get_sqe(ring);
+io_uring_prep_xxx(sqe, ...
+sqe->flags |= IOSQE_IO_LINK;
+...
+# third submission
+sqe = io_uring_get_sqe(ring);
+io_uring_prep_xxx(sqe, ...
+# do NOT set flag here -since end of chain
+...
+# submit all previous entries
+io_uring_submit(ring);
+```  
+
 #### Running
+
+Running the file server and `curl` ing:
 
 ```sh
 # >curl localhost:12345/index.html -v
