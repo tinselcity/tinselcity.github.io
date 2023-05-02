@@ -17,7 +17,7 @@ Software engineer with experience in the development of web servers, and cloud b
 SKILLS
 
 Topics: Clients/Servers, Internet Protocols, (HTTP/H2, TLS, UDP, TCP/IP), WAF’s
-Languages: C, C++, Python, Bash, Golang
+Languages: C, C++, Golang, Python, Bash
 Process: Agile/SAFe
 
 Education: B.S. Electrical Engineering (University of California Davis)
