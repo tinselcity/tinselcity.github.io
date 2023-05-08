@@ -5,6 +5,8 @@ title: Sendfile with io_uring (almost)
 
 Inspired by the [flurry](https://despairlabs.com/blog/posts/2021-06-16-io-uring-is-not-an-event-system/) of [discussions](https://developers.redhat.com/articles/2023/04/12/why-you-should-use-iouring-network-io) around `io_uring` development, I wanted to try writing a basic efficient HTTP file server with [liburing](https://github.com/axboe/liburing), and especially with `sendfile` functionality, since it was ["left as an exercise for the reader"](https://lwn.net/Articles/810491/).
 
+---
+
 ### Blocking vs Non-Blocking
 
 In brief (because [no one has ever written a server](https://github.com/search?q=io_uring_submit) with `io_uring` /s), dealing with I/O is usually synchronous (_blocking_) or asynchronous (_non-blocking_).  ~Blocking from the perspective of the execution context (yielding coroutines notwithstanding).
@@ -51,12 +53,16 @@ while true:
 ...  
 ```
 
-### Submission Queues and Completion Queues
+---
 
-`io_uring` (and especially [liburing](https://github.com/axboe/liburing)) _feels_ like the asynchronous paradigm, of issuing non-blocking I/O calls, but the key difference being instead of making the calls directly, I/O syscalls are "submitted" to a "queue", and the application can block pending "completion" of these requested syscalls.
+### Submission Queues and Completion Queues
 
 ![img](https://github.com/tinselcity/tinselcity.github.io/blob/master/images/io_uring.jpg?raw=true "io_uring")
 *Source: https://medium.com/nttlabs/rust-async-with-io-uring-db3fa2642dd4*
+
+
+`io_uring` (and especially [liburing](https://github.com/axboe/liburing)) _feels_ like the asynchronous paradigm, of issuing non-blocking I/O calls, but the key difference being instead of making the calls directly, I/O syscalls are "submitted" to a "queue", and the application can block pending "completion" of these requested syscalls.
+
 
 A TCP server w/ `io_uring` (liburing) might look like
 
@@ -164,6 +170,8 @@ hignx_uring.c:main.611: read(0)
 hignx_uring.c:main.714: close(0)
 ```
 
+---
+
 ### Almost but not quite...
 
 It's _almost_ possible to write an HTTP server with `sendfile` behavior using just `io_uring` with the current single exception of `pipe2`, to create a pipe between the file object and the client connection object.
@@ -198,6 +206,8 @@ See issues:
 
 - "io_uring" is slower than epoll: [https://github.com/axboe/liburing/issues/189](https://github.com/axboe/liburing/issues/189)
 - "Yet another comparison... w/ epoll..." [https://github.com/axboe/liburing/issues/536](https://github.com/axboe/liburing/issues/536)
+
+---
 
 ### Future Directions
 
