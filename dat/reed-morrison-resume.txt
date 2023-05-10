@@ -26,7 +26,7 @@ Education: B.S. Electrical Engineering (University of California Davis)
 PROFESSIONAL EXPERIENCE
 
 Senior Principal Software Engineer (CDN) Edgio, Playa Vista, CA
-(September 2019 - present)
+(September 2019 - December 2022)
 
 Edge front-end server development, including: L7 load balancing, consistent hashing/cache key generation with scaling for popular content, secure highly multi-tenant TLS termination (client to edge).  Developed concepts for customer configurations with support for self-service and faster edge distribution.
 
