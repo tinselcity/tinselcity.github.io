@@ -53,7 +53,7 @@ Where the `gWasm` is WebAssembly module compiled and instantiated from the`libin
   })();
 ```
 
-The resulting buffer is pass to the C function:
+The resulting buffer is passed to the C function:
 
 ```js
   buffer = convertFromString(document.getElementById("form_field").value);
