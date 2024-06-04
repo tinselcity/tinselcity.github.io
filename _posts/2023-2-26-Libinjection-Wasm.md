@@ -24,7 +24,7 @@ clang \
   ./libinjection_sqli.c
 ```
 
-I added a few C utilities from `libc` like `memcpy`/`strnlen` etc into a module (`string.c`) for compiling with `--no-stanadard-libraries`.  Other better approaches include linking with [wasi-libc](https://github.com/WebAssembly/wasi-libc) (which include [release assets](https://github.com/WebAssembly/wasi-sdk/releases) for their sdk).  Building generated the [`.wasm` file](https://github.com/tinselcity/tinselcity.github.io/blob/master/dat/blog/2023_2_26_Libinjection_Wasm/libinjection.wasm) for use in the browser application.
+I added a few C utilities from `libc` like `memcpy`/`strnlen` etc into a module (`string.c`) for compiling with `--no-standard-libraries`.  Other better approaches include linking with [wasi-libc](https://github.com/WebAssembly/wasi-libc) (which include [release assets](https://github.com/WebAssembly/wasi-sdk/releases) for their sdk).  Building generated the [`.wasm` file](https://github.com/tinselcity/tinselcity.github.io/blob/master/dat/blog/2023_2_26_Libinjection_Wasm/libinjection.wasm) for use in the browser application.
 
 There's a lot of great references around the web with `hello world` wasm projects.  I found [this](https://depth-first.com/articles/2019/10/16/compiling-c-to-webassembly-and-running-it-without-emscripten/) one especially helpful.
 
