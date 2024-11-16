@@ -25,10 +25,15 @@ Education: B.S. Electrical Engineering (University of California Davis)
 
 PROFESSIONAL EXPERIENCE
 
+Software Engineer Anduril, Costa Mesa, CA
+(June 2023 - Present)
+
+
 Senior Principal Software Engineer (CDN) Edgio, Playa Vista, CA
 (September 2019 - December 2022)
 
 Edge front-end server development, including: L7 load balancing, consistent hashing/cache key generation with scaling for popular content, secure highly multi-tenant TLS termination (client to edge).  Developed concepts for customer configurations with support for self-service and faster edge distribution.
+
 
 Security Core Development Lead (CDN) Edgio, Playa Vista, CA
 (August 2016 - September 2019)
@@ -69,8 +74,5 @@ Led flight SW verification effort including development of test requirements,  t
 Electrical Engineer ATK Space and Sensors (now Phase Coherence Inc.), Torrance, CA
 (July 2001 - April 2007)
 
-Medical Imaging System:
-For the Wellman Center of Photomedicine, developed fast data acquisition/storage system for a medical imaging application running on a single board computer.  Wrote low overhead high speed file system for managing data stored to a RAID from the SBC via fiber-channel.  Co-developed fast B-Spline interpolation and baseband conversion algorithms for an FPGA.
-
 Laser Radar System:
-Developed laser radar data acquisition/processing server application for multi-CPU single board computers.  Demanding real-time performance requirements were met by: vectorizing radar algorithms, distributing workload over many CPUs, and optimizing corner turns per cache size.  Developed multi-processor notification/communication driver with POSIX-like interfaces.  Created fast 2-D graphing framework for Mac OS X that was successfully deployed in 5 projects.
+Developed laser radar data acquisition/processing server application for multi-CPU single board computers.  Demanding real-time performance requirements were met by: vectorizing radar algorithms, distributing workload over many CPUs, and optimizing corner turns per cache size.  Developed multi-processor notification/communication driver.

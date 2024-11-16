@@ -15,10 +15,10 @@ permalink: /about/
 
 #### Open Source Projects
 
-- multitenant ModSecurity compatible waf engine ([waflz](https://github.com/edgio/waflz))
-- http(s)/h2 load test utility ([hurl](https://github.com/edgio/hurl))
-- http(s) api server library ([is2](https://github.com/edgio/is2))
-- tls protocol scanner ([tlsscan](https://github.com/edgio/tlsscan))
+- multitenant ModSecurity compatible waf engine ([waflz](https://github.com/tinselcity/waflz))
+- http(s)/h2 load test utility ([hurl](https://github.com/tinselcity/hurl))
+- http(s) api server library ([is2](https://github.com/tinselcity/is2))
+- tls protocol scanner ([tlsscan](https://github.com/tinselcity/tlsscan))
 - BitTorrent client ([ntrnt](https://github.com/tinselcity/ntrnt))
 
 ---
