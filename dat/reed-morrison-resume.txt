@@ -21,7 +21,7 @@ EXPERIENCE WITH
 
 Topics: Clients/Servers, Internet Protocols, (HTTP/H2, TLS, UDP, TCP/IP, gRPC), VPN's (IPSec), WAF's
 Languages: C, C++, Rust, Golang, Python, Bash
-OS: Linux (NixOS, RHEL, Ubuntu)
+OS/Environments: Linux (NixOS, RHEL, Ubuntu), K8s (RKE2), Docker
 
 
 PROFESSIONAL EXPERIENCE
