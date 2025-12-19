@@ -29,7 +29,7 @@ PROFESSIONAL EXPERIENCE
 Software Engineer Anduril, Costa Mesa, CA
 (June 2023 - Present)
 
-Secure L3 mesh VPN development (IPSec) for drones/towers/cloud environments.
+L3 mesh IPSec VPN development for drones/towers/cloud environments.
 Asset local network configuration services including radio integrations.
 
 
