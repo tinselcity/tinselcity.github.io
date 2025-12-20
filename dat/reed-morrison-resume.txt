@@ -13,7 +13,7 @@ STATEMENT
 
 Software engineer with experience in the development of mesh VPNs, web servers, and cloud based security applications (WAF, bot mitigation, rate-limiting).  Lead teams, and created several successful product lines at a reasonably large scale (in number of customers and traffic).  Interested in peer to peer networking, web servers, and web application security.
 
-Education: B.S. Electrical Engineering (University of California Davis)
+Education: B.S. Electrical and Computer Engineering (University of California Davis)
 Clearance: Top Secret (Active)
 
 
